@@ -1,11 +1,12 @@
 var nbRecords = 0;
 var limit = 900;
-//Metiers.remove({});
+Metiers.remove({});
 
 
 var apiCall = function (apiUrl, accessToken, method, callback) {
   // try…catch allows you to handle errors 
   try {
+    
     var response = HTTP.get(apiUrl,{
             headers:{"Authorization": accessToken,
                      "Content-Type":"application/x-www-form-urlencoded;charset=iso-8859-1"
@@ -17,19 +18,21 @@ var apiCall = function (apiUrl, accessToken, method, callback) {
   } catch (error) {
     // If the API responded with an error message and a payload 
     console.log(error);
+    var errorCode = null;
+    var errorMessage = null;
     if (error.response) {
-      var errorCode = error.response.data.code;
-      var errorMessage = error.response.data.message;
+      errorCode = error.response.data.code;
+      errorMessage = error.response.data.message;
     // Otherwise use a generic error message
     } else {
-      var errorCode = 500;
-      var errorMessage = 'Cannot access the API';
+      errorCode = 500;
+      errorMessage = 'Cannot access the API';
     }
     // Create an Error object and return it via callback
     var myError = new Meteor.Error(errorCode, errorMessage);
     callback(myError, null);
   }
-}
+};
 
 var accessToken = function (){
     var secretANPE = Meteor.settings.private.anpePrivateKey;
@@ -39,7 +42,7 @@ var accessToken = function (){
     var token = HTTP.post(tokenUrl).data.access_token;
 
     return token;
-}
+};
 /*
 Meteor.methods({
     "getPackageId" : function(){
@@ -101,6 +104,7 @@ Meteor.methods({
     apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " + '"' + romeId +'"' + 'LIMIT '+ limit +' OFFSET ' + offset;
    else
     apiUrl = "https://api.emploi-store.fr/api/action/datastore_search?resource_id=" +  romeId;
+
     var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
 
     return response;
@@ -130,8 +134,9 @@ Meteor.startup(function () {
               "code":item.ROME_PROFESSION_CARD_CODE
             });
         });
-        })
-      }
+        });
+      };
+      console.log(accessToken());
 
       Meteor.call("getROME","","",function(error,data){ 
         var self = this;
@@ -140,7 +145,7 @@ Meteor.startup(function () {
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE
-            })
+            });
         });
 
         if (nbRecordsTotal > 100){
