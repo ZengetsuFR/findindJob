@@ -23,7 +23,7 @@ libelleRome ="";
        
       var stats = response.result.records[0].NB_OFFER_END_MONTH*100/response.result.records[0].NB_APPLICATION_END_MONTH;
       stats = stats.toFixed(2);
-      nboffre = "( soit " + response.result.records[0].NB_OFFER_END_MONTH + " offres)"
+      nboffre = "( soit " + response.result.records[0].NB_OFFER_END_MONTH + " offres)";
       Session.set("StatsForRome",stats);      
       var sel = document.getElementById('metier');
 			//var opt = sel.options[sel.selectedIndex];
@@ -32,7 +32,7 @@ libelleRome ="";
 			libelleRome = sel.value.substring(0,pos);
       statRome = stats;
 
-    })
+    });
     return false;
    }   
  });
@@ -59,7 +59,7 @@ libelleRome ="";
             template:Template.resultMetier
           }
         ]
-    }
+    };
   }
  });
  

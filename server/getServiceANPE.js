@@ -1,6 +1,6 @@
 var nbRecords = 0;
 var limit = 900;
-Metiers.remove({});
+//Metiers.remove({});
 
 
 var apiCall = function (apiUrl, accessToken, method, callback) {
