@@ -1,0 +1,84 @@
+<template name="resultMetier">
+ <span>{{metier}}</span>
+</template>
+
+<template name="packageList">
+	<div id="barrerecherche">
+	<form>
+		<!--<input class="search" type="search" id="searchJob" placeholder="Rechercher par métier" >-->
+		<div id="contentinput">
+		{{> inputAutocomplete settings=settings id="metier" class="form-control" name= "metier" placeholder="Rechercher par métier"}}
+		<br/>
+		<div class="searchbtn">
+		<button type="button" id="notification-trigger" class="progress-button bouton-bleu">
+					<span class="content">Rechercher</span>
+					<span class="progress"></span>
+	  </button>
+		</div>
+	</div> 		
+   </form>
+ </div>
+
+   <div>
+     <script src="asset/js/classie.js"></script>
+			<script src="asset/js/notificationFx.js"></script>
+			<script>
+				window.addEventListener("load", pageFullyLoaded, false);
+				function pageFullyLoaded(e) {
+					var bttn = document.getElementById( 'notification-trigger' ); 
+					// make sure..
+					bttn.disabled =false;
+					bttn.addEventListener( 'click', function() {
+						var textToShare = encodeURI("http://twitter.com/share?text=Pour mon futur métier " + libelleRome + " il existe actuellement " +  statRome + "% d'offres d'emploi")
+						// simulate loading (for demo purposes only)
+						classie.add( bttn, 'active' );
+						setTimeout( function() {
+	
+							classie.remove( bttn, 'active' );
+
+							var notification = new NotificationFx({
+								message : '<h3>' + libelleRome + '</h3> <div id="secteur-data">' + statRome +'</div> <div id="secteur-description">offres pour 100 demandeurs</div>' +
+								          '<a href='+ textToShare + ' class="bouton-bleu secteur-bouton">Partager sur twitter</a>' +
+													'<a href="http://www.facebook.com/share.php?u=www.monfuturmetier.com" class="bouton-bleu secteur-bouton">Partager sur Facebook</a>',
+													/*'<a href="#" class="bouton-rose secteur-bouton">Effectuer une autre recherche</a>',*/
+								layout : 'growl',
+								effect : 'jelly',
+								type : 'notice', // notice, warning, error or success
+								onClose : function() {
+									bttn.disabled = false;
+								}
+							});
+	
+							// show the notification
+							notification.show();
+	
+						}, 1200 );
+						
+						// disable the button (for demo purposes only)
+						this.disabled = false;
+					} );
+        }
+
+					
+			</script>           
+   </div>
+  <!--    
+  <div class="posts">
+    <select id="packageId" name="packageId">
+      {{#each packages}}
+       <option value="{{id}}">{{title}}</option> 
+      {{/each}}
+    </select>
+  </div>
+  </form>
+  <div class="posts">
+    {{#if resources}}
+    <select id="resourceId" name="resourceId">
+      {{#each resources}}
+       <option value="{{id}}">{{description}}</option> 
+      {{/each}}
+    </select>
+    {{/if}}
+    -->
+    
+</template>
