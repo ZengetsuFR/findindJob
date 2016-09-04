@@ -4,7 +4,6 @@
   "scripts": {
     "start": "meteor run"
   },
-<<<<<<< HEAD
   "engines": {
     "node": "0.10.33",
     "npm":  "1.4.23"
@@ -13,13 +12,6 @@
     "angular": "^1.5.7",
     "angular-meteor": "^1.3.11",
     "meteor-node-stubs": "^0.2.3"
-=======
-  "dependencies": {
-    "angular": "^1.5.7",
-    "angular-meteor": "^1.3.11",
-    "meteor-node-stubs": "^0.2.3",
-    "semantic-ui": "^2.2.1"
->>>>>>> 1dc3330d12808c8b6dd66408145d38163f4e2809
   },
   "devDependencies": {
     "eslint": "^2.13.0",
@@ -29,10 +21,5 @@
     "eslint-plugin-meteor": "^3.6.0",
     "eslint-plugin-react": "^5.2.2"
   }
-<<<<<<< HEAD
-
 }
 
-=======
-}
->>>>>>> 1dc3330d12808c8b6dd66408145d38163f4e2809
