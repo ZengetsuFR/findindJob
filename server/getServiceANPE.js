@@ -179,13 +179,13 @@ var deleteDoubleQuote = function(metier){
  if (metier.indexOf("''")>0){
    metier = metier.replace("''","'");
  }
- return accent_fold(metier);
+  metier = accent_fold(metier); // delete accent
+ return metier;
 };
 
 var accent_fold = (function () {
     var accent_map = {
         'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', // a
-        'ç': 'c',                                                   // c
         'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e',                     // e
         'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i',                     // i
         'ñ': 'n',                                                   // n
