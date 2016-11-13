@@ -179,5 +179,28 @@ var deleteDoubleQuote = function(metier){
  if (metier.indexOf("''")>0){
    metier = metier.replace("''","'");
  }
- return metier;
-}
+ return accent_fold(metier);
+};
+
+var accent_fold = (function () {
+    var accent_map = {
+        'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', // a
+        'ç': 'c',                                                   // c
+        'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e',                     // e
+        'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i',                     // i
+        'ñ': 'n',                                                   // n
+        'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', // o
+        'ß': 's',                                                   // s
+        'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u',                     // u
+        'ÿ': 'y'                                                    // y
+    };
+
+    return function accent_fold(s) {
+        if (!s) { return ''; }
+        var ret = '';
+        for (var i = 0; i < s.length; i++) {
+            ret += accent_map[s.charAt(i)] || s.charAt(i);
+        }
+        return ret;
+    };
+} ()); 
