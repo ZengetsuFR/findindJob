@@ -1,6 +1,8 @@
 var nbRecords = 0;
 var limit = 900;
-Metiers.remove({});
+var fieldtoFind ="";
+
+//Metiers.remove({});
 
 
 var apiCall = function (apiUrl, accessToken, method, callback) {
@@ -167,7 +169,7 @@ Meteor.startup(function () {
 */
 Meteor.publish('romes', function(job) {
   var m = null;
-  //var diacriticJob = accent_fold(job);
+  
 
   if (job){
     m = Metiers.find({
