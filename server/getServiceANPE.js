@@ -210,7 +210,8 @@ var accent_fold = (function () {
         'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', // o
         'ß': 's',                                                   // s
         'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u',                     // u
-        'ÿ': 'y'                                                    // y
+        'ÿ': 'y',                                                     // y
+        "'":"'"
     };
 
     return function accent_fold(s) {
@@ -219,6 +220,6 @@ var accent_fold = (function () {
         for (var i = 0; i < s.length; i++) {
             ret += accent_map[s.charAt(i)] || s.charAt(i);
         }
-        return ret;
+        return deleteDoubleQuote(ret);
     };
 } ()); 
