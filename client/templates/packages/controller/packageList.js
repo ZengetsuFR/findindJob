@@ -11,7 +11,9 @@ libelleRome ="";
        
        Session.set('job',event.currentTarget.value);
        Meteor.subscribe('romes', event.currentTarget.value,function() {
-          console.log("search : " + Metiers.find().count());
+          Meteor.call("fieldFiltre",function(err,response){
+            Session.set("fieldToFind",response);
+          });
        });
        //Meteor.subscribe('romes', event.currentTarget.value);
      //}
@@ -20,7 +22,6 @@ libelleRome ="";
      var romeCode = doc.code.toString();
 
      Meteor.call("getStatForRome",romeCode,function(err,response){
-       
       var stats = response.result.records[0].NB_OFFER_END_MONTH*100/response.result.records[0].NB_APPLICATION_END_MONTH;
       stats = stats.toFixed(2);
       nboffre = "( soit " + response.result.records[0].NB_OFFER_END_MONTH + " offres)"
@@ -32,7 +33,7 @@ libelleRome ="";
 			libelleRome = sel.value.substring(0,pos);
       statRome = stats;
 
-    })
+    });
     return false;
    }   
  });
@@ -43,8 +44,10 @@ libelleRome ="";
   },
   rome:function(){
     //var obj = Metiers.find({ metier: {$regex: Session.get('job'), $options: '-i'} });
-
-    return Metiers.find();
+    var findRecord = Metiers.find();
+    var nbRecord = Metiers.find().count();
+    console.log(nbRecord);
+    return findRecord;
   },
   settings: function(){
     return{
@@ -54,12 +57,12 @@ libelleRome ="";
           {
             token:"",
             collection: Metiers,
-            field: "metier",
+            field: Session.get('fieldToFind'),
             matchAll: true,
             template:Template.resultMetier
           }
         ]
-    }
+    };
   }
  });
  

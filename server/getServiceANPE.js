@@ -127,11 +127,12 @@ Meteor.startup(function () {
         _.each(data.result.records, function(item) {
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
-              "code":item.ROME_PROFESSION_CARD_CODE
+              "code":item.ROME_PROFESSION_CARD_CODE,
+              "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
             });
         });
-        })
-      }
+        });
+      };
 
       Meteor.call("getROME","","",function(error,data){ 
         var self = this;
@@ -139,8 +140,9 @@ Meteor.startup(function () {
         _.each(data.result.records, function(item) {
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
-              "code":item.ROME_PROFESSION_CARD_CODE
-            })
+              "code":item.ROME_PROFESSION_CARD_CODE,
+              "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
+            });
         });
 
         if (nbRecordsTotal > 100){
@@ -165,21 +167,37 @@ Meteor.startup(function () {
 */
 Meteor.publish('romes', function(job) {
   var m = null;
-  console.log(job);
+  //var diacriticJob = accent_fold(job);
+
   if (job){
     m = Metiers.find({
        metier:{$regex: job, $options: '-i'}},
        {sort: {metier:1}
       });
+    fieldtoFind = "metier";
+
+    if (m.count() === 0){
+      m = Metiers.find({
+       "metierwithoutdiacritics":{$regex: job, $options:'-i'}
+      });
+      fieldtoFind = "metierwithoutdiacritics";
+    }
   }
+
     return m;
+});
+
+Meteor.methods({
+  fieldFiltre: function () {
+    return fieldtoFind;
+  }
 });
 
 var deleteDoubleQuote = function(metier){
  if (metier.indexOf("''")>0){
    metier = metier.replace("''","'");
  }
-  metier = accent_fold(metier); // delete accent
+  //metier = accent_fold(metier); // delete accent
  return metier;
 };
 
