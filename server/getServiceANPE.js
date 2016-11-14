@@ -1,6 +1,6 @@
 var nbRecords = 0;
 var limit = 900;
-//Metiers.remove({});
+Metiers.remove({});
 
 
 var apiCall = function (apiUrl, accessToken, method, callback) {
@@ -29,7 +29,7 @@ var apiCall = function (apiUrl, accessToken, method, callback) {
     var myError = new Meteor.Error(errorCode, errorMessage);
     callback(myError, null);
   }
-}
+};
 
 var accessToken = function (){
     var secretANPE = Meteor.settings.private.anpePrivateKey;
@@ -39,7 +39,7 @@ var accessToken = function (){
     var token = HTTP.post(tokenUrl).data.access_token;
 
     return token;
-}
+};
 /*
 Meteor.methods({
     "getPackageId" : function(){
