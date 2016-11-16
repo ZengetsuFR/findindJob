@@ -14,12 +14,14 @@ libelleRome ="";
    "keypress input#metier" : function(event){
      //if (event.which === 13) {
        
-       Session.set('job',event.currentTarget.value + " ");
-       Meteor.subscribe('romes', event.currentTarget.value + " ",function() {
+       Session.set('job',event.currentTarget.value);
+       setTimeout( function() {
+        Meteor.subscribe('romes', event.currentTarget.value,function() {
           Meteor.call("fieldFiltre",function(err,response){
             Session.set("fieldToFind",response);
           });
        });
+       },500);
        //Meteor.subscribe('romes', event.currentTarget.value);
      //}
    },
