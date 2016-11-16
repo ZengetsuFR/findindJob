@@ -42,26 +42,39 @@ var accessToken = function (){
 
     return token;
 };
-/*
+
 Meteor.methods({
-    "getPackageId" : function(){
+    "getPackageId1" : function(){
         //obtenir liste package id
         
        
        //Lister les métiers
-        //var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search?resource_id=47dbbaba-c983-47df-bd9c-eaeec14bd834"
+        //var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search?resource_id=47dbbaba-c983-47df-bd9c-eaeec14bd834";
         //var apiUrl = "https://api.emploi-store.fr/api/action/package_show?id=47dbbaba-c983-47df-bd9c-eaeec14bd834";
         //var apiUrl = "https://api.emploi-store.fr/api/action/package_show?id=80341a24-a451-49ec-b6b0-1b8756fe977d";
         //var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search?resource_id=421692f5-f342-4223-9c51-72a27dcaf51e";
         //var apiUrl = "https://api.emploi-store.fr/api/action/resource_show?id=421692f5-f342-4223-9c51-72a27dcaf51e";
+
+        //get ressource stat par code rome
+        //var apiUrl = "https://api.emploi-store.fr/api/action/resource_show?id=266f691f-bce8-4443-808e-8e5aa125cf17";
+
         //var  apiUrl = 'https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from "421692f5-f342-4223-9c51-72a27dcaf51e" WHERE "CITY_NAME" =' +"'NANTES'" + 'LIMIT 50';
+        var code = "D1102";
+        var  apiUrl = 'https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from "266f691f-bce8-4443-808e-8e5aa125cf17"' + 
+                      ' WHERE "ROME_PROFESSION_CARD_CODE" LIKE ' + "'" + code + "'" +
+                      ' AND "AREA_TYPE_CODE" =' + "'F'" ;
+
         //statistique Janvier 2016 - a66fe203-5bba-4dc8-8c70-7d0d6daf67f7
-}*/
+
+        var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
+        return response;
+      }
+    });
 //id pour l'information sur le marché du travail
-//var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
+var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
 
 //PackageId for ROME "78f91db4-b3c0-400c-a68d-47df9387e5a7"
-var packageId = "78f91db4-b3c0-400c-a68d-47df9387e5a7";
+//var packageId = "78f91db4-b3c0-400c-a68d-47df9387e5a7";
 
 //id Pour les statistiques sur les offres et demandes d'emploi par code ROME
 var resourceId ="266f691f-bce8-4443-808e-8e5aa125cf17";
@@ -110,8 +123,8 @@ Meteor.methods({
  "getStatForRome":function(code){
   var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " + 
                 '"' + resourceId +'"' + ' WHERE "ROME_PROFESSION_CARD_CODE" LIKE ' + "'" + code + "'" +
-                'AND "AREA_TYPE_CODE" =' + AreaTypeCode;
-               
+                ' AND "AREA_TYPE_CODE" =' + AreaTypeCode;
+   console.log("apiUrl : " + apiUrl);            
    var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
 
    return response;

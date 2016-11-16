@@ -7,11 +7,12 @@
 	<form>
 		<!--<input class="search" type="search" id="searchJob" placeholder="Rechercher par métier" >-->
 		<div id="contentinput">
-		{{> inputAutocomplete settings=settings id="metier" class="form-control" name= "metier" placeholder="Rechercher par métier"}}
-		<br/>
+		{{> inputAutocomplete settings=settings id="metier" class="form-control" name= "metier" autocomplete="off" onfocus="this.value = '';" placeholder="Rechercher par métier"}} 
+        <br/>
+        <label id="labelInfo" style="color:red"></label>
 		<div class="searchbtn">
 		<button type="button" id="notification-trigger" class="progress-button bouton-bleu">
-					<span class="content">Rechercher</span>
+					<span id="libelleRechercher" class="content">Rechercher</span>
 					<span class="progress"></span>
 	  </button>
 		</div>

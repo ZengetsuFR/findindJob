@@ -237,7 +237,7 @@ BANDEAU ANPE
 	background: #8be3c0;
 	text-align: center;
 	color: #3c6655;
-	padding-top: 20px;
+	padding-top: 10px;
 	position: fixed;
 	-webkit-animation:apparitionbandeauanpe 1;
 	-moz-animation:apparitionbandeauanpe 1;
@@ -385,7 +385,7 @@ html,body{
 	background: #8be3c0;
 	text-align: center;
 	color: #3c6655;
-	padding-top: 20px;
+	padding-top: 10px;
 	position: fixed;
 	bottom: 0;
 	font-size: 14px;
@@ -408,13 +408,13 @@ h3{
 	width: 260px;
 	top: 50%;
 	left: 50%;
-	margin-left: -150px;
+	margin-left: -125px;
 	margin-top: -280px;
 }
 
 #secteur-data{
 	color: #fc1e5c;
-	/*font-size: 80px;*/
+	font-size: 80px;
 	font-weight: 700px;
 	margin: 0 auto;
 	line-height: 80px;
