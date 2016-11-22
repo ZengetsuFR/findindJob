@@ -11,22 +11,22 @@ html,body{
 	background: url(../images/hp-background.jpg) no-repeat center fixed #1a1f24;
 	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
 	background-size: cover; /* version standardisée */
-		
+
 	}
 
 @font-face {
     font-family: Circular;
     src: url(../fonts/CircularStd-Book.otf);
     }
-    
+
  #page{
  	width: 100%;
  	height: 100%;
  	position: relative;
  	transform-style: preserve-3d;
  }
- 
- 
+
+
 
 /*************************************
 STYLE H
@@ -47,11 +47,11 @@ h1{
 	-webkit-animation-duration:1s;
 	-moz-animation-duration:1s;
 	animation-duration:1s;
-	opacity: 0;	
+	opacity: 0;
 }
 
 
-  
+
 
 h2{
 	font-size: 17px;
@@ -69,7 +69,7 @@ h2{
 	-webkit-animation-duration:1s;
 	-moz-animation-duration:1s;
 	animation-duration:1s;
-	opacity: 0;	
+	opacity: 0;
 }
 
 h3{
@@ -77,7 +77,7 @@ h3{
 	text-align: center;
 	text-transform: uppercase;
 	margin: 0px 0px 0px;
-	
+
 }
 
 /*************************************
@@ -89,7 +89,7 @@ GLOBAL ANIMATION
    opacity:0;
    margin-top: 20px;
   }
-  
+
   to {
    opacity: 1;
    margin-top: 0px;
@@ -99,7 +99,7 @@ GLOBAL ANIMATION
 
 
 /*************************************
-PAGE 
+PAGE
 *************************************/
 
 #content{
@@ -117,6 +117,11 @@ PAGE
 	text-align: left ;
 }
 
+#contentinputbtn{
+	color: #000;
+	text-align: left ;
+}
+
 
 /**** BOUTONS GLOBALE *****/
 
@@ -128,7 +133,7 @@ PAGE
 	font-size: 15px;
 	display: block;
 	border-radius: 2px;
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .bouton-bleu:hover{
@@ -144,7 +149,7 @@ PAGE
 	border-radius: 2px;
 	display: block;
 	text-decoration: none;
-	
+
 }
 
 .bouton-rose:hover{
@@ -164,7 +169,7 @@ PAGE
   border: none;
   width: 400px;
   font-size: 15px;
-  margin: 0px;  
+  margin: 0px;
   -webkit-animation:apparitioncontentline 1;
   -moz-animation:apparitioncontentline 1;
   animation:apparitioncontentline 1;
@@ -175,7 +180,7 @@ PAGE
   -webkit-animation-duration:1s;
   -moz-animation-duration:1s;
   animation-duration:1s;
-  opacity: 0;	
+  opacity: 0;
   float: left;
 }
 
@@ -196,11 +201,11 @@ PAGE
 	-webkit-animation-duration:1s;
 	-moz-animation-duration:1s;
 	animation-duration:1s;
-	opacity: 0;	
+	opacity: 0;
 	float: left;
 	border-top-left-radius:0px;
 	border-bottom-left-radius:0px;
-	
+
 }
 
 .progress-button .progress {
@@ -230,7 +235,7 @@ PAGE
 /*************************************
 BANDEAU ANPE
 *************************************/
-    
+
 #anpebandeau-desktop{
 	height: 35px;
 	width: 100%;
@@ -251,17 +256,17 @@ BANDEAU ANPE
 	animation-duration:1s;
 	opacity: 1;
 	 bottom: -55px;
-	
-		
+
+
 }
 
 @keyframes apparitionbandeauanpe{
   from {
   	opacity: 1;
     bottom: -55px;
-   
+
   }
-  
+
   to {
   	opacity: 1;
     bottom: 0;
@@ -277,7 +282,7 @@ BANDEAU ANPE
 /*************************************
 POP IN
 *************************************/
-    
+
 .ns-box {
 	position: fixed;
 	width: 420px;
@@ -293,20 +298,20 @@ POP IN
 	background: #fff;
 	color: #000;
 	text-align: center;
-	
+
 }
 
-    
+
 #secteur-data{
 	color: #fc1e5c;
-	font-size: 150px;
+	font-size: 100px;
 	font-weight: 700;
 	margin: 0 auto;
 	line-height: 170px;
 }
 
 #secteur-description{
-	width: 300px;
+	width: 400px;
 	margin: 0 auto 20px;
 }
 
@@ -333,7 +338,7 @@ html,body{
 	padding: 0;
 	margin: 0;
     font-family: Circular;
-		
+
 	}
 
 
@@ -341,7 +346,7 @@ html,body{
 	text-align: center;
 	width: 86%;
 	min-height: 340px;
-	
+
 }
 
 
@@ -354,21 +359,21 @@ html,body{
   padding: 20px 5%;
   width: 100%;
   font-size: 15px;
-  margin: 0px 0px 20px;  
+  margin: 0px 0px 20px;
   border: none;
-  
+
 }
 
 .bouton-bleu{
 	padding: 20px 30px;
 	width: 100%;
-	
+
 }
 
 .progress-button {
 	border-top-left-radius:2px;
 	border-bottom-left-radius:2px;
-	
+
 }
 
 
@@ -376,7 +381,7 @@ html,body{
 
 #anpebandeau-desktop{
 	display: none;
-		
+
 }
 
 #anpebandeau-mobile{
@@ -390,7 +395,7 @@ html,body{
 	bottom: 0;
 	font-size: 14px;
 	display: block;
-		
+
 }
 
 
@@ -401,7 +406,7 @@ h3{
 	text-align: center;
 	text-transform: uppercase;
 	margin: 0px 0px 0px;
-	
+
 }
 
 .ns-box {
