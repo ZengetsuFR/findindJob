@@ -1,23 +1,25 @@
 var offsetRome = null;
 var metiersList = null;
-var breakpointRome = [{
+var job = null;
+var urlParams = null;
+breakpointRome = [{
     breakpointNumber: 100 / 10,
-    wordingRome: "ÉVITE !",
+    wordingRome: "<p style='font-size:100px;'>ÉVITE !</p>",
     wordingPopin:"BOUCHÉ"
     },
     {
     breakpointNumber: 100 / 4,
-    wordingRome: "C’EST CONCURRENTIEL",
+    wordingRome: "<p style='font-size:30px;'>C’EST CONCURRENTIEL</p>",
     wordingPopin:"CONCURRENTIEL"
 
     },
     {
     breakpointNumber: 100 / 2,
-    wordingRome: "C'EST DÉGAGÉ",
+    wordingRome: "<p style='font-size:50px;'>C'EST DÉGAGÉ</p>",
     wordingPopin:"DÉGAGÉ"
     }, {
     breakpointNumber: 100,
-    wordingRome: "FONCE !",
+    wordingRome: "<p style='font-size:100px;'>FONCE !</p>",
     wordingPopin:"PORTEUR"
     }
 ]
@@ -26,10 +28,11 @@ nboffre =0;
 libelleRome = "";
 libellePopin = "";
 wordingRome= "";
-wordingLibellePopin= "";
+wordingLibellePopin = "";
 
-console.log(breakpointRome[0].breakpointNumber);
-
+var test = function () {
+    alert("test");
+}
  Template.packageList.events({
    "keypress input#metier" : function(event){
      //if (event.which === 13) {
@@ -46,9 +49,9 @@ console.log(breakpointRome[0].breakpointNumber);
      //}
    },
    "autocompleteselect input" : function(event, template, doc){
-     var romeCode = doc.code.toString();
-
-     Meteor.call("getStatForRome", romeCode, function (err, response) {
+       romeCode = doc.code.toString();
+       callGetStatForRome();
+     /*Meteor.call("getStatForRome", romeCode, function (err, response) {
          console.log(response);
 
       if (err){
@@ -72,7 +75,7 @@ console.log(breakpointRome[0].breakpointNumber);
         statRome = wordingRome;
       }
 
-    });
+    });*/
     return false;
    }
 });
@@ -98,7 +101,7 @@ console.log(breakpointRome[0].breakpointNumber);
   settings: function(){
     return{
         position:"bottom",
-        limit:30,
+        limit:10,
         rules:[
           {
             token:"",
