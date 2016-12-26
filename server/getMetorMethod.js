@@ -2,52 +2,30 @@ var nbRecords = 0;
 var limit = 900;
 var fieldtoFind ="";
 
+var JSON_Metier = "[";
 //Metiers.remove({});
 
+//id pour l'information sur le marché du travail
+var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
 
-var apiCall = function (apiUrl, accessToken, method, callback) {
-  // try…catch allows you to handle errors 
-  try {
-    var response = HTTP.get(apiUrl,{
-            headers:{"Authorization": accessToken,
-                     "Content-Type":"application/x-www-form-urlencoded;charset=iso-8859-1"
-}
-        }).data;
-    // A successful API call returns no error 
-    // but the contents from the JSON response
-    callback(null, response);
-  } catch (error) {
-    // If the API responded with an error message and a payload 
-    console.log(error);
-    if (error.response) {
-      var errorCode = error.response.data.code;
-      var errorMessage = error.response.data.message;
-    // Otherwise use a generic error message
-    } else {
-      var errorCode = 500;
-      var errorMessage = 'Cannot access the API';
-    }
-    // Create an Error object and return it via callback
-    var myError = new Meteor.Error(errorCode, errorMessage);
-    callback(myError, null);
-  }
-};
+//referenctiel competence
+var romeId = "7c7b90a4-11e6-4283-97f3-59dbf40d8e86";
 
-var accessToken = function (){
-    var secretANPE = Meteor.settings.private.anpePrivateKey;
-    var clientId = Meteor.settings.public.anpePublicKey;
-    var tokenParam = "realm=/developpeur&grant_type=client_credentials&client_id=" + clientId + "&client_secret=" + secretANPE;
-    var tokenUrl = "https://www.emploi-store-dev.fr/identite/oauth2/access_token?" + tokenParam;
-    var token = HTTP.post(tokenUrl).data.access_token;
+//id Pour les statistiques sur les offres et demandes d'emploi par code ROME
+var resourceId = "266f691f-bce8-4443-808e-8e5aa125cf17";
 
-    return token;
-};
+//PackageId for ROME "78f91db4-b3c0-400c-a68d-47df9387e5a7"
+//var packageId = "78f91db4-b3c0-400c-a68d-47df9387e5a7";
+
+//Liste des métier (ROME)
+//var romeId = "767d0c4a-277b-493c-84b7-00143933efce";
+
 
 Meteor.methods({
     "getPackageId1" : function(){
         //obtenir liste package id
-        
-       
+
+
        //Lister les métiers
         //var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search?resource_id=47dbbaba-c983-47df-bd9c-eaeec14bd834";
         //var apiUrl = "https://api.emploi-store.fr/api/action/package_show?id=47dbbaba-c983-47df-bd9c-eaeec14bd834";
@@ -60,7 +38,7 @@ Meteor.methods({
 
         //var  apiUrl = 'https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from "421692f5-f342-4223-9c51-72a27dcaf51e" WHERE "CITY_NAME" =' +"'NANTES'" + 'LIMIT 50';
         var code = "D1102";
-        var  apiUrl = 'https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from "266f691f-bce8-4443-808e-8e5aa125cf17"' + 
+        var  apiUrl = 'https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from "266f691f-bce8-4443-808e-8e5aa125cf17"' +
                       ' WHERE "ROME_PROFESSION_CARD_CODE" LIKE ' + "'" + code + "'" +
                       ' AND "AREA_TYPE_CODE" =' + "'F'" ;
 
@@ -68,22 +46,9 @@ Meteor.methods({
 
         var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
         return response;
-      }
-    });
-//id pour l'information sur le marché du travail
-var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
+    }
+});
 
-//PackageId for ROME "78f91db4-b3c0-400c-a68d-47df9387e5a7"
-//var packageId = "78f91db4-b3c0-400c-a68d-47df9387e5a7";
-
-//id Pour les statistiques sur les offres et demandes d'emploi par code ROME
-var resourceId ="266f691f-bce8-4443-808e-8e5aa125cf17";
-
-//Liste des métier (ROME)
-//var romeId = "767d0c4a-277b-493c-84b7-00143933efce";
-
-//referenctiel competence
-var romeId = "7c7b90a4-11e6-4283-97f3-59dbf40d8e86";
 //------------------------------------------------------------
 //PackageID rome : "78f91db4-b3c0-400c-a68d-47df9387e5a7"
 //var packageId ="78f91db4-b3c0-400c-a68d-47df9387e5a7";
@@ -100,18 +65,18 @@ Meteor.methods({
  "getPackageId" : function(){
    var apiUrl = "https://api.emploi-store.fr/api/action/organization_show?id=digidata";
    var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
-   
+
    return response;
  },
  "getPackageShow": function(){
    var apiUrl = "https://api.emploi-store.fr/api/action/package_show?id=" + packageId;
    var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
-   
+
    return response;
  },
  "getROME": function(offset,limit){
    var apiUrl;
-   
+
    if (offset)
     apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " + '"' + romeId +'"' + 'LIMIT '+ limit +' OFFSET ' + offset;
    else
@@ -121,25 +86,26 @@ Meteor.methods({
     return response;
  },
  "getStatForRome":function(code){
-  var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " + 
+  var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " +
                 '"' + resourceId +'"' + ' WHERE "ROME_PROFESSION_CARD_CODE" LIKE ' + "'" + code + "'" +
                 ' AND "AREA_TYPE_CODE" =' + AreaTypeCode;
-   console.log("apiUrl : " + apiUrl);            
+   console.log("apiUrl : " + apiUrl);
    var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
 
    return response;
  }
-});  
+});
 
 Meteor.startup(function () {
   if (Metiers.find().count() === 0) {
       var  insertIntoMetier = function (){
         var self = this;
-        
+
         Meteor.call("getROME",nbRecords,limit,function(error,data){
         nbRecords += data.result.records.length;
-
-        _.each(data.result.records, function(item) {
+        _.each(data.result.records, function (item) {
+           JSON_Metier += '{"metier":"'+ deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase())
+                + '", "code":"' + item.ROME_PROFESSION_CARD_CODE + '"},';
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
@@ -149,10 +115,12 @@ Meteor.startup(function () {
         });
       };
 
-      Meteor.call("getROME","","",function(error,data){ 
+      Meteor.call("getROME","","",function(error,data){
         var self = this;
         var nbRecordsTotal = data.result.total;
-        _.each(data.result.records, function(item) {
+        _.each(data.result.records, function (item) {
+          JSON_Metier += '{"metier":"'+ deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase())
+                + '", "code":"' + item.ROME_PROFESSION_CARD_CODE + '"},';
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
@@ -164,25 +132,32 @@ Meteor.startup(function () {
           for (var index = 100; index < nbRecordsTotal; index+= 100) {
               insertIntoMetier ();
           }
+          JSON_Metier += "]";
           if (nbRecords < nbRecordsTotal){
             limit = nbRecordsTotal - nbRecords;
             nbRecords +=  limit;
           }
+        } else {
+            JSON_Metier += "]";
         }
+
+        var fs = require('fs');
+        var fileName = process.env["PWD"] + 'job.json';
+        fs.writeFile(fileName, JSON_Metier, function (err) {
+            if (err) return console.log(err);
+            console.log('Hello World > helloworld.txt');
+            console.log(JSON_Metier);
+        });
         console.log("nbRecordsTotal :" + nbRecordsTotal);
         console.log("End of Traitement");
-        console.log("-----------"); 
+        console.log("-----------");
      });
-  } 
+  }
 });
 
-/*Meteor.publish('romes', function() {
-     return Metiers.find();
-});
-*/
 Meteor.publish('romes', function(job) {
   var m = null;
-  
+
 
   if (job){
     m = Metiers.find({
@@ -237,4 +212,4 @@ var accent_fold = (function () {
         }
         return deleteDoubleQuote(ret);
     };
-} ()); 
+} ());
