@@ -1,29 +1,53 @@
-<template name="home">
-    <div id="page">
-		<div id="logo">
-            <a href="/"><img src='asset/images/queldebouche.png' style="width:117px"/></a>
-		</div>
-		<div id="nav">
-			<a href="mailto:xxx">Contact</a>
-		</div>
+<template name="packageList">
+    <h1>Ton futur métier est-il porteur ? </h1>
+	<h2>Découvre le taux de chômage de ton futur métier ou secteur !</h2>
 
-         <div id="content">
-			<h1>Ton futur métier est-il porteur ? </h1>
-			<h2>Découvre le taux de chômage de ton futur métier ou secteur !</h2>
-         <div id="main"></div>
-				{{> packageList}}
-		</div>
+    <div id="main">
 
-		<div id="dataanpe">
-            Ce site utilise uniquement les données Pôle Emploi
-		</div>
+    <form>
+    <div id="barrerecherche">
+        <input id="recherchermetier"
+                type='text'
+                placeholder='Rechercher un métier'
+                class='flexdatalist search'
+                data-min-length='1'
+                data-data='findjob.json'
+                data-search-in='metier'
+                maxlength="50"
+                size="50"
+                onfocus="this.value = ''">
+		    <button id="notification-trigger" class="progress-button bouton-rose">
+			    <span class="content">Rechercher</span>
+			    <span class="progress"></span>
+		    </button>
+	</div>
+    <div id="dataanpe">Ce site utilise uniquement les données Pôle Emploi</div>
+    <!--
+    <div>
+            <datalist id="metiers">
+                {{#each json}}
+                <option value="{{metier}}" data-id="{{code}}">{{code}}</option>
+            {{/each}}
+        </datalist>
+    </div>
+    -->
+   </form>
+   </div>
 
-        <div id="ulule-desktop">
-			Aidez-nous à faire vivre et améliorer “Quel débouché”. Participez à la campagne Ulule.
-		</div>
-
-        <div id="ulule-mobile">
-			Soutenez-nous sur ulule !
-		</div>
-	 </div>
+    <script>
+       $("input").blur(function(){
+           console.log($(this).val());
+        });
+    </script>
+   <script type="text/javascript">
+        if( $.isFunction($.fn.flexdatalist) ){
+           //console.log("flexdatalist est chargé");
+                $('.flexdatalist').flexdatalist({
+                    minLength: 0,
+                    searchIn: 'metier',
+                    data: "findjob.json",
+                    valueProperty: "*"
+                });
+        }
+     </script>
 </template>

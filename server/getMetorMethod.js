@@ -85,11 +85,11 @@ Meteor.methods({
 
     return response;
  },
- "getStatForRome":function(code){
+ "getStatForRome": function (code) {
   var apiUrl = "https://api.emploi-store.fr/api/action/datastore_search_sql?sql=SELECT * from " +
                 '"' + resourceId +'"' + ' WHERE "ROME_PROFESSION_CARD_CODE" LIKE ' + "'" + code + "'" +
                 ' AND "AREA_TYPE_CODE" =' + AreaTypeCode;
-   console.log("apiUrl : " + apiUrl);
+
    var response = Meteor.wrapAsync(apiCall)(apiUrl,"Bearer " + accessToken(),"get");
 
    return response;
