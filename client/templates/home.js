@@ -62,7 +62,6 @@ var findjobWithRomeCode = function () {
             "facebookurl": encodeURIComponent(window.location)
         };
         Session.set("statForRome", result);
-        $('meta[name=og\\:description]').attr('content', texttoShare);
     })
 };
 
@@ -92,17 +91,13 @@ Template.job.events({
     },
     'click #shareBtn': function (event, template) {
         var sharingElementToFacebook = Session.get("statForRome");
-        var descriptionfacebook = sharingElementToFacebook.texttoShare;
-        var linkfacebook = sharingElementToFacebook.facebookurl;
-        console.log(descriptionfacebook);
-        console.log(linkfacebook);
             FB.ui({
                 display: 'popup',
                 method: 'share',
                 title: 'Ton futur métier est-il porteur ?',
-                description: descriptionfacebook,
+                description: sharingElementToFacebook.texttoShare,
                 link: linkfacebook,
-                href: 'www.queldebouche.fr',
+                href: sharingElementToFacebook.facebookurl,
             }, function (response) { });
     }
 })
@@ -117,18 +112,9 @@ Template.packageList.events({
             Session.set("statForRome", null);
             metier = metierAndCode["metier"];
             code = metierAndCode["code"];
-            findjobWithRomeCode();
+            setTimeout(
+            findjobWithRomeCode(),500);
             Router.go('/job?metier=' + metier + "&code=" + code);
-        }
-    },
-    "keydown #recherchermetiermongo-flexdatalist": function (event, template, doc) {
-        var searchjob = event.currentTarget.value;
-        subscription && subscription.stop();
-        if (searchjob.length > 2) {
-            subscription = Meteor.subscribe('findjob', searchjob);
-            console.log("keydown : " + Metiers.find().count());
-            console.log(Metiers.find().fetch())
-            returnjob = Metiers.find().fetch();
         }
     }
 });
