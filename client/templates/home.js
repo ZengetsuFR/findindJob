@@ -96,7 +96,6 @@ Template.job.events({
                 method: 'share',
                 title: 'Ton futur métier est-il porteur ?',
                 description: sharingElementToFacebook.texttoShare,
-                link: linkfacebook,
                 href: sharingElementToFacebook.facebookurl,
             }, function (response) { });
     }
@@ -112,9 +111,10 @@ Template.packageList.events({
             Session.set("statForRome", null);
             metier = metierAndCode["metier"];
             code = metierAndCode["code"];
-            setTimeout(
-            findjobWithRomeCode(),500);
-            Router.go('/job?metier=' + metier + "&code=" + code);
+            findjobWithRomeCode();
+            setTimeout(function() {
+              Router.go('/job?metier=' + metier + "&code=" + code);
+            }, 200);
         }
     }
 });
