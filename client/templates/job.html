@@ -8,7 +8,9 @@
         </div>
         <script>
          function shareBtn(texttoShare,facebookurl){
-             document.getElementById('shareBtn').onclick = function(texttoShare,faceboourl) {
+             console.log(texttoShare);
+             console.log(facebookurl);
+             document.getElementById('shareBtn').onclick = function(texttoShare,facebookurl) {
                  FB.ui({
                      display: 'popup',
                      method: 'share',

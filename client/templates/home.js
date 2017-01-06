@@ -48,7 +48,7 @@ var findjobWithRomeCode = function () {
         var stats = response.result.records[0].NB_OFFER_END_MONTH * 100 / response.result.records[0].NB_APPLICATION_END_MONTH;
         stats = stats.toFixed(2);
         breakpoint(stats);
-        var texttoShare = "Actuellement pour le métier " + wordingRome
+        var texttoShare = "Actuellement pour le métier " + metier
             + ": tu as " + nbOffer + " postes disponibles pour "
             + nbDemande + " demandeurs";
         var result = {
