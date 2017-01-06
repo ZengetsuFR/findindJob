@@ -89,6 +89,21 @@ Template.job.events({
     },
     'click #posttoFacebook': function (event, template) {
         event.preventDefault();
+    },
+    'click #shareBtn': function (event, template) {
+        var sharingElementToFacebook = Session.get("statForRome");
+        var descriptionfacebook = sharingElementToFacebook.texttoShare;
+        var linkfacebook = sharingElementToFacebook.facebookurl;
+        console.log(descriptionfacebook);
+        console.log(linkfacebook);
+            FB.ui({
+                display: 'popup',
+                method: 'share',
+                title: 'Ton futur métier est-il porteur ?',
+                description: descriptionfacebook,
+                link: linkfacebook,
+                href: 'www.queldebouche.fr',
+            }, function (response) { });
     }
 })
 

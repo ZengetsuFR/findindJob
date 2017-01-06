@@ -153,8 +153,6 @@ writeJsonFile = function () {
     var fileName = process.env["PWD"] + 'job.json';
     fs.writeFile(fileName, JSON_Metier, function (err) {
         if (err) return console.log(err);
-        console.log('Hello World > helloworld.txt');
-        console.log(JSON_Metier);
     });
 
 
@@ -163,8 +161,6 @@ writeJsonFile = function () {
 Meteor.publish('romes', function(job) {
   var m = null;
 
-
-  console.log(job);
   if (job){
     m = Metiers.find({
        metier:{$regex: job, $options: '-i'}},
