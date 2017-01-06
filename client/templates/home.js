@@ -10,6 +10,8 @@ var wordingLibellePopin = "";
 var urlParams = new URLSearchParams(window.location.search);
 var metier = urlParams.get("metier");
 var code = urlParams.get("code");
+var subscription;
+returnjob = null;
 
 breakpointRome = [{
     breakpointNumber: 100 / 10,
@@ -46,21 +48,33 @@ var findjobWithRomeCode = function () {
         var stats = response.result.records[0].NB_OFFER_END_MONTH * 100 / response.result.records[0].NB_APPLICATION_END_MONTH;
         stats = stats.toFixed(2);
         breakpoint(stats);
+        var texttoShare = "Actuellement pour le métier " + wordingRome
+            + ": tu as " + nbOffer + " postes disponibles pour "
+            + nbDemande + " demandeurs";
         var result = {
             "metier": metier,
             "nbOffre": nbOffer,
             "nbDemande": nbDemande,
             "stats": stats,
             "wordingLibellePopin": wordingLibellePopin,
-            "wordingRome": wordingRome
+            "wordingRome": wordingRome,
+            "texttoShare": texttoShare,
+            "facebookurl": encodeURIComponent(window.location)
         };
         Session.set("statForRome", result);
+        $('meta[name=og\\:description]').attr('content', texttoShare);
     })
 };
+
+var shareBtn = function () {
+    console.log("test");
+}
+
 
 if (metier && code && Session.get("statForRome") ==null) {
     findjobWithRomeCode();
 }
+
 
 Template.job.helpers({
     metiers: function () {
@@ -72,6 +86,9 @@ Template.job.events({
     'click #backHome': function (event, template) {
         event.preventDefault();
         Router.go("/")
+    },
+    'click #posttoFacebook': function (event, template) {
+        event.preventDefault();
     }
 })
 
@@ -88,9 +105,33 @@ Template.packageList.events({
             findjobWithRomeCode();
             Router.go('/job?metier=' + metier + "&code=" + code);
         }
+    },
+    "keydown #recherchermetiermongo-flexdatalist": function (event, template, doc) {
+        var searchjob = event.currentTarget.value;
+        subscription && subscription.stop();
+        if (searchjob.length > 2) {
+            subscription = Meteor.subscribe('findjob', searchjob);
+            console.log("keydown : " + Metiers.find().count());
+            console.log(Metiers.find().fetch())
+            returnjob = Metiers.find().fetch();
+        }
     }
 });
 
+findjob = function (input) {
+    var searchjob = input.value;
+    subscription && subscription.stop();
+    if (searchjob.length > 2) {
+        subscription = Meteor.subscribe('findjob', input.value);
+        console.log(Metiers.find().count());
+    }
+}
+
+Template.packageList.helpers({
+    findjob: function () {
+        return Metiers.find();
+    }
+})
 /*
  Template.packageList.helpers({
   statRome:function(){

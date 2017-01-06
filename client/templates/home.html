@@ -21,33 +21,19 @@
 			    <span class="progress"></span>
 		    </button>
 	</div>
-    <div id="dataanpe">Ce site utilise uniquement les données Pôle Emploi</div>
-    <!--
-    <div>
-            <datalist id="metiers">
-                {{#each json}}
-                <option value="{{metier}}" data-id="{{code}}">{{code}}</option>
-            {{/each}}
-        </datalist>
-    </div>
-    -->
-   </form>
-   </div>
+    </form>
 
-    <script>
-       $("input").blur(function(){
-           console.log($(this).val());
-        });
-    </script>
-   <script type="text/javascript">
+    <div id="dataanpe">Ce site utilise uniquement les données Pôle Emploi</div>
+    <script type="text/javascript">
         if( $.isFunction($.fn.flexdatalist) ){
            //console.log("flexdatalist est chargé");
                 $('.flexdatalist').flexdatalist({
-                    minLength: 0,
+                    minLength: 2,
                     searchIn: 'metier',
                     data: "findjob.json",
                     valueProperty: "*"
                 });
         }
      </script>
+    </div>
 </template>

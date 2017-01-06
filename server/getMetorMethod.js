@@ -140,14 +140,7 @@ Meteor.startup(function () {
         } else {
             JSON_Metier += "]";
         }
-
-        var fs = require('fs');
-        var fileName = process.env["PWD"] + 'job.json';
-        fs.writeFile(fileName, JSON_Metier, function (err) {
-            if (err) return console.log(err);
-            console.log('Hello World > helloworld.txt');
-            console.log(JSON_Metier);
-        });
+        //writeJsonFile();
         console.log("nbRecordsTotal :" + nbRecordsTotal);
         console.log("End of Traitement");
         console.log("-----------");
@@ -155,10 +148,23 @@ Meteor.startup(function () {
   }
 });
 
+writeJsonFile = function () {
+    var fs = require('fs');
+    var fileName = process.env["PWD"] + 'job.json';
+    fs.writeFile(fileName, JSON_Metier, function (err) {
+        if (err) return console.log(err);
+        console.log('Hello World > helloworld.txt');
+        console.log(JSON_Metier);
+    });
+
+
+}
+
 Meteor.publish('romes', function(job) {
   var m = null;
 
 
+  console.log(job);
   if (job){
     m = Metiers.find({
        metier:{$regex: job, $options: '-i'}},
@@ -175,6 +181,12 @@ Meteor.publish('romes', function(job) {
   }
 
     return m;
+});
+
+Meteor.publish('findjob', function(job) {
+    if (job) {
+        return Metiers.find({ metier: { $regex: job, $options: '-i' } }, { sort: { metier: 1 } });
+    }
 });
 
 Meteor.methods({
