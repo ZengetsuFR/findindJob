@@ -130,7 +130,7 @@ Template.job.events({
             FB.ui({
                 display: 'popup',
                 method: 'share',
-                title: 'Ton futur métier est-il porteur ?',
+                title: 'Quel Debouché',
                 description: sharingElementToFacebook.description ,
                 quote:sharingElementToFacebook.quote,
                 href: "www.queldebouche.fr"
