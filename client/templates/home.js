@@ -50,7 +50,7 @@ var findjobWithRomeCode = function () {
         breakpoint(stats);
         var texttoShare = "Actuellement pour le métier " + metier
             + ": tu as " + nbOffer + " postes disponibles pour "
-            + nbDemande + " demandeurs. Données à retrouver sur " + encodeURIComponent(window.location);
+            + nbDemande + " demandeurs. Données à retrouver sur " + window.location;
         var result = {
             "metier": metier,
             "nbOffre": nbOffer,
@@ -59,7 +59,7 @@ var findjobWithRomeCode = function () {
             "wordingLibellePopin": wordingLibellePopin,
             "wordingRome": wordingRome,
             "texttoShare": texttoShare,
-            "facebookurl": encodeURIComponent(window.location)
+            "facebookurl": window.location
         };
         Session.set("statForRome", result);
     })
@@ -79,6 +79,10 @@ Template.job.helpers({
     metiers: function () {
         return Session.get("statForRome");
     }
+})
+
+Template.job.onCreated(function () {
+    this.subscribe("getStatForRome");
 })
 
 Template.job.events({
@@ -113,9 +117,7 @@ Template.packageList.events({
             metier = metierAndCode["metier"];
             code = metierAndCode["code"];
             findjobWithRomeCode();
-            setTimeout(function() {
-              Router.go('/job?metier=' + metier + "&code=" + code);
-            }, 200);
+            Router.go('/job?metier=' + metier + "&code=" + code);
         }
     }
 });
