@@ -41,7 +41,7 @@ h1{
 	-webkit-animation:apparitioncontentline 1;
 	-moz-animation:apparitioncontentline 1;
 	animation:apparitioncontentline 1;
-	animation-delay: 1s;
+	animation-delay: 0.5s;
 	-webkit-animation-fill-mode:forwards;
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
@@ -62,7 +62,7 @@ h2{
 	-webkit-animation:apparitioncontentline 1;
 	-moz-animation:apparitioncontentline 1;
 	animation:apparitioncontentline 1;
-	animation-delay: 1.5s;
+	animation-delay: 1s;
 	-webkit-animation-fill-mode:forwards;
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
@@ -451,4 +451,10 @@ h2{
 	text-decoration: none;
     transform: scale(2.5);
     transform-origin: top;
+}
+
+.errormessage{
+    color: #ea1717;
+    margin-left: -306px;
+    font-size: 20px;
 }

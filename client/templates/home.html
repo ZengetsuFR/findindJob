@@ -5,17 +5,21 @@
     <div id="main">
 
     <form>
+    {{#if errormessage}}
+     <span id="errormessage" class="errormessage">{{errormessage}}</span>
+    {{/if}}
     <div id="barrerecherche">
         <input id="recherchermetier"
                 type='text'
                 placeholder='Rechercher un métier'
                 class='flexdatalist search'
-                data-min-length='1'
+                data-min-length=0
                 data-data='findjob.json'
                 data-search-in='metier'
+                data-selectionRequired=true
+                data-focusFirstResult=true
                 maxlength="50"
-                size="50"
-                onfocus="this.value = ''">
+                onfocus="this.value = '';Session.set('errormessage','')">
 		    <button id="notification-trigger" class="progress-button bouton-rose">
 			    <span class="content">Rechercher</span>
 			    <span class="progress"></span>
@@ -28,10 +32,12 @@
         if( $.isFunction($.fn.flexdatalist) ){
            //console.log("flexdatalist est chargé");
                 $('.flexdatalist').flexdatalist({
-                    minLength: 2,
+                    minLength: 0,
                     searchIn: 'metier',
                     data: "findjob.json",
-                    valueProperty: "*"
+                    valueProperty: "*",
+                    maxShownResults:500,
+                    searchContain:true
                 });
         }
      </script>

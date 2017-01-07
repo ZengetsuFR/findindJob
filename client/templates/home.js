@@ -42,11 +42,10 @@ var urlParams = new URLSearchParams(window.location.search);
 var metier = urlParams.get("metier");
 var code = urlParams.get("code");*/
 
+var subscription;
 var metier = unescape(getURLParameters("metier"));
 var code = unescape(getURLParameters("code"));
-var subscription;
-console.log(metier)
-console.log(code)
+
 returnjob = null;
 
 breakpointRome = [{
@@ -103,7 +102,7 @@ var findjobWithRomeCode = function () {
 };
 
 
-if (metier && code && Session.get("statForRome") ==null) {
+if (metier !="undefined" && code!="undefined" && Session.get("statForRome") ==null) {
     findjobWithRomeCode();
 }
 
@@ -143,13 +142,16 @@ Template.packageList.events({
     "submit form": function (event) {
         // Prevent default browser form submit
         event.preventDefault();
-        var metierAndCode = JSON.parse($(event.target).find('[id = recherchermetier]').val());
-        if (metierAndCode) {
+        try {
+            var metierAndCode = JSON.parse($(event.target).find('[id = recherchermetier]').val());
             Session.set("statForRome", null);
             metier = metierAndCode["metier"];
             code = metierAndCode["code"];
             findjobWithRomeCode();
             Router.go('/job?metier=' + escape(metier) + "&code=" + escape(code));
+        } catch (error) {
+            console.log("dans le else");
+            Session.set("errormessage", "Merci de selectionner un métier dans la liste ")
         }
     }
 });
@@ -163,9 +165,15 @@ findjob = function (input) {
     }
 }
 
+Template.packageList.onRendered(function () {
+})
+
 Template.packageList.helpers({
     findjob: function () {
         return Metiers.find();
+    },
+    errormessage: function () {
+        return Session.get("errormessage");
     }
 })
 /*
