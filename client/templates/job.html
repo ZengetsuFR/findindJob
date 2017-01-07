@@ -1,4 +1,5 @@
 <template name="job">
+    {{#if Template.subscriptionsReady}}
         <h1>Futur {{metiers.metier}} ?</h1>
         <h2><u>{{metiers.wordingRome}}</u> Tu as {{metiers.nbOffre}} postes disponibles pour {{metiers.nbDemande}} demandeurs</h2>
 
@@ -6,4 +7,7 @@
             <a id="shareBtn" href="#" class="bouton-blanc">Partager sur Facebook</a>
             <a href="#" id="backHome" data-id="link" class="bouton-rose" onclick="shareBtn()">Chercher un autre métier</a>
         </div>
+         {{else}}
+    Chargement en cours...
+  {{/if}}
 </template>
