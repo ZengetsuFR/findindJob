@@ -86,7 +86,7 @@ var findjobWithRomeCode = function () {
         breakpoint(stats);
         var texttoShare = "Actuellement pour le métier " + metier
             + ": tu as " + nbOffer + " postes disponibles pour "
-            + nbDemande + " demandeurs. Toi aussi découvre si ton futur métier est porteur www.queldebouche.fr";
+            + nbDemande + " demandeurs.";
         var result = {
             "metier": metier,
             "nbOffre": nbOffer,
@@ -94,7 +94,7 @@ var findjobWithRomeCode = function () {
             "stats": stats,
             "wordingLibellePopin": wordingLibellePopin,
             "wordingRome": wordingRome,
-            "texttoShare": texttoShare,
+            "description": "Découvre si ton futur métier est porteur sur www.queldebouche.fr",
             "facebookurl": window.location,
             "quote": texttoShare
         };
@@ -131,7 +131,7 @@ Template.job.events({
                 display: 'popup',
                 method: 'share',
                 title: 'Ton futur métier est-il porteur ?',
-                description: sharingElementToFacebook.texttoShare ,
+                description: sharingElementToFacebook.description ,
                 quote:sharingElementToFacebook.quote,
                 href: "www.queldebouche.fr"
             }, function (response) { });
