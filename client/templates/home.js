@@ -97,7 +97,7 @@ Template.job.events({
                 title: 'Ton futur métier est-il porteur ?',
                 description: sharingElementToFacebook.texttoShare ,
                 link: sharingElementToFacebook.facebookurl,
-                href:sharingElementToFacebook.facebookurl
+                href:"www.queldebouche.fr"
             }, function (response) { });
     }
 })
