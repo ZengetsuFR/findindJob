@@ -50,7 +50,7 @@ var findjobWithRomeCode = function () {
         breakpoint(stats);
         var texttoShare = "Actuellement pour le métier " + metier
             + ": tu as " + nbOffer + " postes disponibles pour "
-            + nbDemande + " demandeurs";
+            + nbDemande + " demandeurs. Données à retrouver sur " + encodeURIComponent(window.location);
         var result = {
             "metier": metier,
             "nbOffre": nbOffer,
@@ -93,10 +93,10 @@ Template.job.events({
         var sharingElementToFacebook = Session.get("statForRome");
             FB.ui({
                 display: 'popup',
-                method: 'share',
+                method: 'feed',
                 title: 'Ton futur métier est-il porteur ?',
-                description: sharingElementToFacebook.texttoShare,
-                href: sharingElementToFacebook.facebookurl,
+                description: sharingElementToFacebook.texttoShare ,
+                link: sharingElementToFacebook.facebookurl,
             }, function (response) { });
     }
 })
