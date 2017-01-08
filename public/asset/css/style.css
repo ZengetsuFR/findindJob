@@ -341,6 +341,23 @@ RESULTATS
 	margin-bottom:20px;
 }
 
+.fb-share-button {
+    padding: 3px 3px;
+	border: none;
+	color: #000;
+	font-size: 10px;
+	border-radius: 2px;
+	display: block;
+	text-decoration: none;
+    transform: scale(2.5);
+    transform-origin: top;
+}
+
+.errormessage{
+    color: #ea1717;
+    margin-left: -306px;
+    font-size: 20px;
+}
 
 /*************************************
 VERSION MOBILE
@@ -438,23 +455,9 @@ h2{
 	width:100%;
 }
 
-
-}
-
-.fb-share-button {
-    padding: 3px 3px;
-	border: none;
-	color: #000;
-	font-size: 10px;
-	border-radius: 2px;
-	display: block;
-	text-decoration: none;
-    transform: scale(2.5);
-    transform-origin: top;
-}
-
-.errormessage{
+.errormessage {
     color: #ea1717;
-    margin-left: -306px;
-    font-size: 20px;
+    margin-left: -2px;
+    font-size: 18px;
+}
 }
