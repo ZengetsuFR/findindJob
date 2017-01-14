@@ -507,6 +507,9 @@ h2{
   border: none;
 }
 
+.-autocomplete-container{
+    top: 210px !important;
+}
 
 .nojob,
 .-autocomplete-list li {
