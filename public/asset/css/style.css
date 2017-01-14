@@ -514,6 +514,7 @@ h2{
 .nojob,
 .-autocomplete-list li {
   width: 100%;
+  font-size: 12px;
 }
 
 .-autocomplete-list li:nth-child(odd){

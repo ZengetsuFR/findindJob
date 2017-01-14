@@ -31,10 +31,34 @@ function getURLParameters(paramName)
     }
 }
 
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
+
 var nboffre = 0;
 var wordingRome= "";
 var wordingLibellePopin = "";
+var maxNumberOfSearch = 50;
 
+if( isMobile.any() ) maxNumberOfSearch=10;
 
 /*ne marche pas sur SAFARI*/
 /*
@@ -154,7 +178,7 @@ Template.packageList.events({
     },
     "input #metier": function (event) {
         var jobToFind = $("input").val().trim().toLowerCase();
-        console.log(jobToFind);
+
         if (jobToFind.length > 2){
             findjob(jobToFind);
             Session.set("errorrecher", "Aucun métier pour ta saisie");
@@ -195,7 +219,7 @@ Template.packageList.helpers({
     settings: function(){
     return{
         position: "bottom",
-        limit: 50,
+        limit: maxNumberOfSearch,
         rules:[
           {
             token:"",
