@@ -507,6 +507,23 @@ h2{
   border: none;
 }
 
+
+.nojob,
+.-autocomplete-list li {
+  width: 100%;
+}
+
+.-autocomplete-list li:nth-child(odd){
+    width: 100%;
+}
+
+.-autocomplete-list li span.highlight {
+  width: 100%;
+}
+.-autocomplete-list li.selected {
+  width: 100%;
+}
+
 .progress-button {
 	border-top-left-radius:2px;
 	border-bottom-left-radius:2px;
