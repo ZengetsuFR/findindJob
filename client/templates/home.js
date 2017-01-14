@@ -154,7 +154,12 @@ Template.packageList.events({
     },
     "input #metier": function (event) {
         var jobToFind = $("input").val();
-        findjob(jobToFind);
+        if (jobToFind.length > 2){
+            findjob(jobToFind);
+            Session.set("errorrecher", "Aucun métier pour ta saisie");
+        } else {
+            Session.set("errorrecher", "Saisir plus de 2 caractères");
+        }
     },
     "autocompleteselect input": function (event, template, doc) {
         event.preventDefault();
@@ -188,7 +193,8 @@ Template.packageList.helpers({
     },
     settings: function(){
     return{
-        position:"bottom",
+        position: "bottom",
+        limit: 50,
         rules:[
           {
             token:"",
@@ -202,6 +208,12 @@ Template.packageList.helpers({
         ]
     };
   }
+})
+
+Template._noJob.helpers({
+    messagederetour: function () {
+        return Session.get("errorrecher");
+    }
 })
 
 /*
