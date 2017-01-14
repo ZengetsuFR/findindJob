@@ -1,7 +1,7 @@
 <template name="job">
     {{#if Template.subscriptionsReady}}
         <h1>Futur {{metiers.metier}} ?</h1>
-        <h2><u>{{metiers.wordingRome}}</u> Tu as {{metiers.nbOffre}} postes disponibles pour {{metiers.nbDemande}} demandeurs</h2>
+        <h2><u>{{metiers.wordingRome}}</u> Tu as {{metiers.nbOffre}} postes disponibles pour {{metiers.nbDemande}} demandeurs selon les derniers chiffres de Pole Emploi</h2>
 
         <div id="secteur-boutons">
             <a id="shareBtn" href="#" class="bouton-blanc">Partager sur Facebook</a>
@@ -10,4 +10,5 @@
          {{else}}
     <div><img src='asset/images/ripple.svg'/></div>
   {{/if}}
+  <div id="dataanpe">Ce site utilise uniquement les données Pôle Emploi</div>
 </template>

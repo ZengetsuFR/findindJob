@@ -149,22 +149,34 @@ Template.packageList.events({
             findjobWithRomeCode();
             Router.go('/job?metier=' + escape(metier) + "&code=" + escape(code));
         } catch (error) {
-            console.log("dans le else");
+            Session.set("errormessage", "Merci de selectionner un métier dans la liste ")
+        }
+    },
+    "input #metier": function (event) {
+        var jobToFind = $("input").val();
+        findjob(jobToFind);
+    },
+    "autocompleteselect input": function (event, template, doc) {
+        event.preventDefault();
+        try {
+            Session.set("statForRome", null);
+            code = doc.code.toString();
+            metier = doc.metier.toString();
+            findjobWithRomeCode();
+            Router.go('/job?metier=' + escape(metier) + "&code=" + escape(code));
+        } catch (error) {
             Session.set("errormessage", "Merci de selectionner un métier dans la liste ")
         }
     }
 });
 
 findjob = function (input) {
-    var searchjob = input.value;
     subscription && subscription.stop();
-    if (searchjob.length > 2) {
-        subscription = Meteor.subscribe('findjob', input.value);
-        console.log(Metiers.find().count());
-    }
+    subscription = Meteor.subscribe('findjob', input);
 }
 
 Template.packageList.onRendered(function () {
+    $("#metier").attr("autocomplete", "off");
 })
 
 Template.packageList.helpers({
@@ -173,8 +185,25 @@ Template.packageList.helpers({
     },
     errormessage: function () {
         return Session.get("errormessage");
-    }
+    },
+    settings: function(){
+    return{
+        position:"bottom",
+        rules:[
+          {
+            token:"",
+            collection: Metiers,
+            field: "metier",
+            matchAll: true,
+            noMatchTemplate: Template._noJob,
+            template: Template.resultjob,
+            sort:true
+          }
+        ]
+    };
+  }
 })
+
 /*
  Template.packageList.helpers({
   statRome:function(){

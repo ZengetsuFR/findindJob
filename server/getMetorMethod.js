@@ -181,7 +181,8 @@ Meteor.publish('romes', function(job) {
 
 Meteor.publish('findjob', function(job) {
     if (job) {
-        return Metiers.find({ metier: { $regex: job, $options: '-i' } }, { sort: { metier: 1 } });
+        /*return Metiers.find({ metier: { $regex: job, $options: '-i' } }, { sort: { metier: 1 } });*/
+        return Metiers.find({ metier: { $regex: job, $options: '-i' } });
     }
 });
 

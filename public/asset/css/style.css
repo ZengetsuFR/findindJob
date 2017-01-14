@@ -6,7 +6,7 @@ html,body{
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	background: #fff;
+
 	font-family: Circular-Book;
 	background: #4D00D3;
 }
@@ -149,7 +149,9 @@ PAGE
 }
 
 .bouton-rose:hover{
-	background: #2a5ce1;
+	background: #e21b53;
+    text-decoration: none;
+    color: #fff;
 }
 
 .bouton-blanc{
@@ -163,10 +165,10 @@ PAGE
 	text-decoration: none;
 }
 
-.bouton-rose:hover{
-	background: #e21b53;
+.bouton-blanc:hover{
+	background: #EDEDED;
+    text-decoration: none;
 }
-
 
 /**** BARRE RECHERCHE *****/
 
@@ -191,16 +193,63 @@ PAGE
   padding: 20px;
   font-size: 15px;
   border: none;
-  width: 540px;
+  width: 700px;
   font-size: 15px;
   margin: 0px;
   float: left;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
         color: darkgray;
+
+}
+.-autocomplete-container{
+    top: 172px !important;
 }
 
-.flexdatalist-results {
+.nojob,
+.-autocomplete-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: none;
+  background: #fff;
+  z-index: 100000;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  color: #333;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nojob,
+.-autocomplete-list li {
+  padding: 5px 15px;
+  font-size: 14px;
+  line-height: 35px;
+  border:none;
+  width: 700px;
+}
+
+.-autocomplete-list li:nth-child(odd){
+	background:#F0F0F0;
+	border:none;
+    width: 700px;
+}
+
+.-autocomplete-list li span.highlight {
+  font-weight: 700;
+  text-decoration: underline;
+  width: 700px;
+}
+.-autocomplete-list li.selected {
+  background: #fc1e5c;
+  color: #fff;
+  cursor: pointer;
+  width: 700px;
+}
+/*.flexdatalist-results {
   position: absolute;
   top: 0;
   left: 0;
@@ -236,7 +285,7 @@ PAGE
   color: #fff;
   cursor: pointer;
 }
-
+*/
 
 .progress-button{
 	position: relative;
@@ -254,24 +303,67 @@ PAGE
 
 /**** DATA ANPE *****/
 
+/*
 #dataanpe{
     font-family: Circular-Book;
-		padding-top:30px;
-		font-size:14px;
-		-webkit-animation:apparitioncontentline 1;
-		-moz-animation:apparitioncontentline 1;
+	padding-top:30px;
+	font-size:14px;
+	-webkit-animation:apparitioncontentline 1;
+	-moz-animation:apparitioncontentline 1;
 		animation:apparitioncontentline 1;
 		animation-delay: 2.5s;
-		-webkit-animation-fill-mode:forwards;
-		-moz-animation-fill-mode:forwards;
-		animation-fill-mode:forwards;
+		-webkit-animation-fill-mode:backwards;
+		-moz-animation-fill-mode:backwards;
+		animation-fill-mode:backwards;
 		-webkit-animation-duration:1s;
 		-moz-animation-duration:1s;
 		animation-duration:1s;
 		opacity: 0;
 }
+*/
 
+#dataanpe{
+    animation: fadein 2.5s;
+    -moz-animation: fadein 2.5s; /* Firefox */
+    -webkit-animation: fadein 2.5s; /* Safari et Chrome */
+    -o-animation: fadein 2.5s; /* Opera */
+    font-family: Circular-Book;
+	padding-top:30px;
+	font-size:14px;
+}
 
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* sur Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* sur Safari et Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* sur Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 /*************************************
 BANDEAU ANPE
@@ -413,7 +505,6 @@ h2{
   font-size: 15px;
   margin: 0px 0px 20px;
   border: none;
-
 }
 
 .progress-button {

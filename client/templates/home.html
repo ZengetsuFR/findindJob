@@ -1,7 +1,6 @@
 <template name="packageList">
     <h1>Ton futur métier est-il porteur ? </h1>
 	<h2>Découvre le taux de chômage de ton futur métier ou secteur !</h2>
-
     <div id="main">
 
     <form>
@@ -9,6 +8,7 @@
      <span id="errormessage" class="errormessage">{{errormessage}}</span>
     {{/if}}
     <div id="barrerecherche">
+    <!--
         <input id="recherchermetier"
                 type='text'
                 placeholder='Rechercher un métier'
@@ -20,10 +20,13 @@
                 data-focusFirstResult=true
                 maxlength="50"
                 onfocus="this.value = '';Session.set('errormessage','')">
-		    <button id="notification-trigger" class="progress-button bouton-rose">
+            -->
+        {{> inputAutocomplete settings=settings id="metier" class="input-xlarge search" name= "metier" placeholder="Rechercher par métier" }}
+		    <!--<button id="notification-trigger" class="progress-button bouton-rose">
 			    <span class="content">Rechercher</span>
 			    <span class="progress"></span>
 		    </button>
+            -->
 	</div>
     </form>
 
@@ -42,4 +45,10 @@
         }
      </script>
     </div>
+</template>
+<template name="_noJob">
+    <div class="nojob search">(<i>Pas de métier pour ta saisie</i>)</div>
+</template>
+<template name="resultjob">
+ {{metier}}
 </template>
