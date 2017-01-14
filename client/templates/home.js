@@ -153,7 +153,8 @@ Template.packageList.events({
         }
     },
     "input #metier": function (event) {
-        var jobToFind = $("input").val();
+        var jobToFind = $("input").val().trim().toLowerCase();
+        console.log(jobToFind);
         if (jobToFind.length > 2){
             findjob(jobToFind);
             Session.set("errorrecher", "Aucun métier pour ta saisie");
