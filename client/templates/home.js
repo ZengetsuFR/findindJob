@@ -143,7 +143,8 @@ Template.job.onCreated(function () {
 })
 
 Template.packageList.onCreated(function () {
-        this.subscribe("autocompleteMetiers")
+    this.subscribe("autocompleteMetiers")
+    $('*').unbind('keyup keydown')
 })
 
 Template.job.events({
@@ -183,14 +184,7 @@ Template.packageList.events({
         }
     },
     "input #metier": function (event) {
-        Session.set("errorrecher", "Aucun métier pour ta saisie");
-
-       /* if (Metiers.find().count <= 0) {
-            Session.set("errorrecher", "Aucun métier pour ta saisie")
-        }
-        else {
-            Session.set("errorrecher", "Loading")
-        }
+        /*
         var jobToFind = $("input").val().trim().toLowerCase();
         if (jobToFind.length >= 3) {
             setTimeout(function () {
@@ -238,9 +232,6 @@ findjob = function (input) {
 Template.packageList.onRendered(function () {
     $("#metier").attr("autocomplete", "off");
     $('*').unbind('keyup keydown')
-    if (Metiers.find().count <= 0) {
-        Session.set("errorrecher", "Aucun métier pour ta saisie")
-    }
     $("#metier").focus();
     //Meteor.subscribe("autocompleteMetiers")
 })
@@ -264,7 +255,7 @@ Template.packageList.helpers({
             //selector: function (match) { return $("input").val().trim().toLowerCase()},
             option:"si",
             field: "metier",
-            matchAll: true,
+            matchAll: false,
             noMatchTemplate: Template._noJob,
             template: Template.resultjob,
             sort: true
@@ -276,6 +267,13 @@ Template.packageList.helpers({
 
 Template._noJob.helpers({
     messagederetour: function () {
+        console.log(Metiers.find().count());
+        if (Metiers.find().count() === 0) {
+            Session.set("errorrecher", "Aucun métier pour ta saisie")
+        } else {
+            Session.set("errorrecher", "Chargement en cours...")
+        }
+
         return Session.get("errorrecher");
     }
 })

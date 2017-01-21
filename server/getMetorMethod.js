@@ -100,34 +100,33 @@ Meteor.startup(function () {
       var  insertIntoMetier = function (){
         var self = this;
 
-        console.log("nombre enregistrement : " + nbRecords);
         Meteor.call("getROME",nbRecords,limit,function(error,data){
         nbRecords += data.result.records.length;
+        console.log("nombre enregistrement : " + nbRecords);
         _.each(data.result.records, function (item) {
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
               "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
             });
-          nbRecords += 1;
         });
         });
       };
 
-      Meteor.call("getROME","","",function(error,data){
+      Meteor.call("getROME","",limit,function(error,data){
         var self = this;
         var nbRecordsTotal = data.result.total;
+        nbRecords = data.result.records.length;
         _.each(data.result.records, function (item) {
-          Metiers.insert({
+            Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
               "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
             });
-            nbRecords += 1;
         });
 
-        if (nbRecordsTotal > 100) {
-            for (var index = nbRecords+1; index < nbRecordsTotal; index += 100) {
+        if (nbRecordsTotal > limit) {
+            for (var index = nbRecords+1; index < nbRecordsTotal; index += limit +1) {
                 nbRecords = index;
                 insertIntoMetier();
             }
