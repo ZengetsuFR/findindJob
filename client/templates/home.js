@@ -255,7 +255,7 @@ Template.packageList.helpers({
             //selector: function (match) { return $("input").val().trim().toLowerCase()},
             option:"si",
             field: "metier",
-            matchAll: false,
+            matchAll: true,
             noMatchTemplate: Template._noJob,
             template: Template.resultjob,
             sort: true
