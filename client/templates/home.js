@@ -56,7 +56,9 @@ var isMobile = {
 var nboffre = 0;
 var wordingRome= "";
 var wordingLibellePopin = "";
-var maxNumberOfSearch = 50;
+var maxNumberOfSearch = 500;
+
+
 
 if( isMobile.any() ) maxNumberOfSearch=10;
 
@@ -140,6 +142,10 @@ Template.job.onCreated(function () {
     this.subscribe("getStatForRome");
 })
 
+Template.packageList.onCreated(function () {
+        this.subscribe("autocompleteMetiers")
+})
+
 Template.job.events({
     'click #backHome': function (event, template) {
         event.preventDefault();
@@ -177,14 +183,38 @@ Template.packageList.events({
         }
     },
     "input #metier": function (event) {
-        var jobToFind = $("input").val().trim().toLowerCase();
+        Session.set("errorrecher", "Aucun métier pour ta saisie");
 
-        if (jobToFind.length > 2){
-            findjob(jobToFind);
-            Session.set("errorrecher", "Aucun métier pour ta saisie");
-        } else {
-            Session.set("errorrecher", "Saisir plus de 2 caractères");
+       /* if (Metiers.find().count <= 0) {
+            Session.set("errorrecher", "Aucun métier pour ta saisie")
         }
+        else {
+            Session.set("errorrecher", "Loading")
+        }
+        var jobToFind = $("input").val().trim().toLowerCase();
+        if (jobToFind.length >= 3) {
+            setTimeout(function () {
+                findjob(jobToFind);
+            }, 2000);
+            setTimeout(function () {
+                Session.set("errorrecher", "Aucun métier pour ta saisie")
+            }, 500);
+        }*/
+
+        //Meteor.subscribe("autocompleteMetiers", jobToFind)
+        /*Session.set("errorrecher", "Loading")
+        setTimeout(function () {
+            if (jobToFind.length >= 3) {
+                findjob(jobToFind);
+            if (Metiers.find().count <= 0) {
+                Session.set("errorrecher", "Aucun métier pour ta saisie")
+            }
+        } else {
+            Session.set("errorrecher", "Saisir au moins 3 caractères")
+        }
+        }, timeout);
+*/
+        //$('.-autocomplete-container').show();
     },
     "autocompleteselect input": function (event, template, doc) {
         event.preventDefault();
@@ -207,6 +237,12 @@ findjob = function (input) {
 
 Template.packageList.onRendered(function () {
     $("#metier").attr("autocomplete", "off");
+    $('*').unbind('keyup keydown')
+    if (Metiers.find().count <= 0) {
+        Session.set("errorrecher", "Aucun métier pour ta saisie")
+    }
+    $("#metier").focus();
+    //Meteor.subscribe("autocompleteMetiers")
 })
 
 Template.packageList.helpers({
@@ -222,13 +258,16 @@ Template.packageList.helpers({
         limit: maxNumberOfSearch,
         rules:[
           {
-            token:"",
-            collection: Metiers,
+            token: "",
+            //subscription:"autocompleteMetiers",
+            collection:"Metiers",
+            //selector: function (match) { return $("input").val().trim().toLowerCase()},
+            option:"si",
             field: "metier",
             matchAll: true,
             noMatchTemplate: Template._noJob,
             template: Template.resultjob,
-            sort:true
+            sort: true
           }
         ]
     };
@@ -240,7 +279,6 @@ Template._noJob.helpers({
         return Session.get("errorrecher");
     }
 })
-
 /*
  Template.packageList.helpers({
   statRome:function(){

@@ -1,9 +1,8 @@
 var nbRecords = 0;
 var limit = 900;
-var fieldtoFind ="";
-
-var JSON_Metier = "[";
-//Metiers.remove({});
+var fieldtoFind = "";
+//var JSON_Metier = "[";
+Metiers.remove({});
 
 //id pour l'information sur le marché du travail
 var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
@@ -101,16 +100,16 @@ Meteor.startup(function () {
       var  insertIntoMetier = function (){
         var self = this;
 
+        console.log("nombre enregistrement : " + nbRecords);
         Meteor.call("getROME",nbRecords,limit,function(error,data){
         nbRecords += data.result.records.length;
         _.each(data.result.records, function (item) {
-           JSON_Metier += '{"metier":"'+ deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase())
-                + '", "code":"' + item.ROME_PROFESSION_CARD_CODE + '"},';
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
               "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
             });
+          nbRecords += 1;
         });
         });
       };
@@ -119,29 +118,26 @@ Meteor.startup(function () {
         var self = this;
         var nbRecordsTotal = data.result.total;
         _.each(data.result.records, function (item) {
-          JSON_Metier += '{"metier":"'+ deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase())
-                + '", "code":"' + item.ROME_PROFESSION_CARD_CODE + '"},';
           Metiers.insert({
               "metier":deleteDoubleQuote(item.ROME_PROFESSION_NAME.toLowerCase()),
               "code":item.ROME_PROFESSION_CARD_CODE,
               "metierwithoutdiacritics":accent_fold(item.ROME_PROFESSION_NAME.toLowerCase())
             });
+            nbRecords += 1;
         });
 
-        if (nbRecordsTotal > 100){
-          for (var index = 100; index < nbRecordsTotal; index+= 100) {
-              insertIntoMetier ();
-          }
-          JSON_Metier += "]";
-          if (nbRecords < nbRecordsTotal){
-            limit = nbRecordsTotal - nbRecords;
-            nbRecords +=  limit;
-          }
-        } else {
-            JSON_Metier += "]";
+        if (nbRecordsTotal > 100) {
+            for (var index = nbRecords+1; index < nbRecordsTotal; index += 100) {
+                nbRecords = index;
+                insertIntoMetier();
+            }
+            if (nbRecords < nbRecordsTotal) {
+                limit = nbRecordsTotal - nbRecords;
+                nbRecords += limit;
+            }
         }
         //writeJsonFile();
-        console.log("nbRecordsTotal :" + nbRecordsTotal);
+        console.log("nbRecordsTotal :" + nbRecords);
         console.log("End of Traitement");
         console.log("-----------");
      });
@@ -182,7 +178,15 @@ Meteor.publish('romes', function(job) {
 Meteor.publish('findjob', function(job) {
     if (job) {
         /*return Metiers.find({ metier: { $regex: job, $options: '-i' } }, { sort: { metier: 1 } });*/
-        return Metiers.find({ metier: { $regex: job, $options: '-i' } });
+        console.log(Metiers.find({ metier: { $regex: job, $options: 'si' } }).fetch())
+        return Metiers.find({ metier: { $regex: job, $options: 'si' } });
+    }
+});
+
+Meteor.publish('autocompleteMetiers', function (selector, options) {
+    if (selector != "undefined") {
+        Autocomplete.publishCursor(Metiers.find(selector, options), this);
+        this.ready();
     }
 });
 

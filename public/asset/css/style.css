@@ -513,20 +513,50 @@ h2{
 
 .nojob,
 .-autocomplete-list li {
-  width: 100%;
-  font-size: 12px;
+  padding: 5px 15px;
+  font-size: 14px;
+  line-height: 35px;
+  border:none;
+  width: 356px;
 }
 
 .-autocomplete-list li:nth-child(odd){
-    width: 100%;
+	background:#F0F0F0;
+	border:none;
+    width: 356px;
 }
 
 .-autocomplete-list li span.highlight {
-  width: 100%;
+  font-weight: 700;
+  text-decoration: underline;
+  width: 356px;
 }
 .-autocomplete-list li.selected {
-  width: 100%;
+  background: #fc1e5c;
+  color: #fff;
+  cursor: pointer;
+  width: 356px;
 }
+/*
+<div class="-autocomplete-container" style="left: 0px; width: 356px; top: 185px;">
+
+
+            <ul class="-autocomplete-list">
+
+                <li class="-autocomplete-item selected">
+
+
+                            acheteur / acheteuse d'espaces affichage
+
+
+                </li>
+
+            </ul>
+
+
+    </div>
+*/
+
 
 .progress-button {
 	border-top-left-radius:2px;
