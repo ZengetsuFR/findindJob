@@ -2,7 +2,7 @@ var nbRecords = 0;
 var limit = 900;
 var fieldtoFind = "";
 //var JSON_Metier = "[";
-Metiers.remove({});
+//Metiers.remove({});
 
 //id pour l'information sur le marché du travail
 var packageId ="a4f9e4dd-365e-4542-839c-a93a2448e388";
