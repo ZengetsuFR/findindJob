@@ -167,7 +167,8 @@ Template.job.events({
             title: 'Quel Debouché',
             description: sharingElementToFacebook.description,
             quote: sharingElementToFacebook.quote,
-            href: "www.queldebouche.fr"
+            href: "www.queldebouche.fr",
+            picture: "asset/images/share.jpg"
         }, function(response) {});
     }
 })
