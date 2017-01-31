@@ -440,6 +440,7 @@ BANDEAU ANPE
     animation-duration: 1s;
     opacity: 1;
     bottom: -55px;
+    -webkit-box-sizing: content-box;
 }
 
 @keyframes apparitionbandeauanpe {
