@@ -4,9 +4,6 @@
     <div id="main">
 
     <form>
-    {{#if errormessage}}
-     <span id="errormessage" class="errormessage">{{errormessage}}</span>
-    {{/if}}
     <div id="barrerecherche">
     <!--
         <input id="recherchermetier"
@@ -22,11 +19,10 @@
                 onfocus="this.value = '';Session.set('errormessage','')">
             -->
         {{> inputAutocomplete settings=settings id="metier" class="input-xlarge search" name= "metier" placeholder="Rechercher par métier" }}
-		    <!--<button id="notification-trigger" class="progress-button bouton-rose">
-			    <span class="content">Rechercher</span>
+		    <button id="notification-trigger" class="progress-button bouton-rose">
+			    <span class="content"></span>
 			    <span class="progress"></span>
 		    </button>
-            -->
 	</div>
     </form>
 
