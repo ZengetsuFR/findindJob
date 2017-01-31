@@ -165,7 +165,7 @@ Template.job.events({
         FB.ui({
             method: 'share',
             title: 'Quel Debouché',
-            picture: "http://www.queldebouche.fr/asset/images/shareV2.jpg",
+            picture: "http://www.queldebouche.fr/asset/images/shareV2.jpeg",
             description: sharingElementToFacebook.description,
             quote: sharingElementToFacebook.quote,
             href: "www.queldebouche.fr"
