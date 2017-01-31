@@ -163,7 +163,7 @@ Template.job.events({
     'click #shareBtn': function(event, template) {
         var sharingElementToFacebook = Session.get("statForRome");
         FB.ui({
-            method: 'share',
+            method: 'feed',
             title: 'Quel Debouché',
             picture: "http://www.queldebouche.fr/asset/images/share.jpg",
             description: sharingElementToFacebook.description,
