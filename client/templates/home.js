@@ -168,7 +168,7 @@ Template.job.events({
             description: sharingElementToFacebook.description,
             quote: sharingElementToFacebook.quote,
             href: "www.queldebouche.fr",
-            picture: "asset/images/share.jpg"
+            picture: window.location + "asset/images/share.jpg"
         }, function(response) {});
     }
 })
