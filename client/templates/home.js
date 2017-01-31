@@ -165,18 +165,11 @@ Template.job.events({
         FB.ui({
             method: 'share',
             title: 'Quel Debouché',
-            picture: "http://www.queldebouche.fr/asset/images/share.jpg",
-            quote: sharingElementToFacebook.quote,
-            href: "www.queldebouche.fr"
-        }, function(response) {});
-        /*FB.ui({
-            method: 'share',
-            title: 'Quel Debouché',
-            picture: "http://www.queldebouche.fr/asset/images/share.jpg",
+            picture: "http://www.queldebouche.fr/asset/images/shareV2.jpg",
             description: sharingElementToFacebook.description,
             quote: sharingElementToFacebook.quote,
             href: "www.queldebouche.fr"
-        }, function(response) {});*/
+        }, function(response) {});
     }
 })
 
