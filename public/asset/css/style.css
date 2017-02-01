@@ -170,7 +170,13 @@ PAGE
 }
 
 .bouton-blanc:hover {
+    color: #000;
     background: #EDEDED;
+    text-decoration: none;
+}
+
+.bouton-blanc:active {
+    background: 000;
     text-decoration: none;
 }
 
@@ -185,7 +191,7 @@ PAGE
     -webkit-animation: apparitioncontentline 1;
     -moz-animation: apparitioncontentline 1;
     animation: apparitioncontentline 1;
-    animation-delay: 2s;
+    animation-delay: 1.5s;
     -webkit-animation-fill-mode: forwards;
     -moz-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
@@ -203,9 +209,11 @@ PAGE
     font-size: 15px;
     margin: 0px;
     float: left;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    /*border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;*/
     color: darkgray;
+    border-radius: 3px;
+    outline: none;
 }
 
 .-autocomplete-container {
@@ -371,6 +379,16 @@ PAGE
     font-family: Circular-Book;
     padding-top: 30px;
     font-size: 14px;
+    -webkit-animation: apparitioncontentline 1;
+    -moz-animation: apparitioncontentline 1;
+    animation: apparitioncontentline 1;
+    animation-delay: 2.5s;
+    -webkit-animation-fill-mode: backwards;
+    -moz-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 @keyframes fadein {
