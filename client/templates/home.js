@@ -275,6 +275,7 @@ Template.packageList.helpers({
                 field: "metier",
                 matchAll: true,
                 noMatchTemplate: Template._noJob,
+                loadingTemplate: Template._searchingJob,
                 template: Template.resultjob,
                 sort: true
             }]
