@@ -165,14 +165,6 @@ Template.job.events({
             quote: sharingElementToFacebook.quote,
             href: "www.queldebouche.fr"
         }, function(response) {});
-        /*FB.ui({
-            method: 'share',
-            title: 'Quel Debouché',
-            picture: "http://www.queldebouche.fr/asset/images/share.jpg",
-            description: sharingElementToFacebook.description,
-            quote: sharingElementToFacebook.quote,
-            href: "www.queldebouche.fr"
-        }, function(response) {});*/
     }
 })
 
@@ -196,31 +188,6 @@ Template.packageList.events({
     },
     "input #metier": function(event) {
         $("#metier").removeClass('errormessage');
-        /*
-        var jobToFind = $("input").val().trim().toLowerCase();
-        if (jobToFind.length >= 3) {
-            setTimeout(function () {
-                findjob(jobToFind);
-            }, 2000);
-            setTimeout(function () {
-                Session.set("errorrecher", "Aucun métier pour ta saisie")
-            }, 500);
-        }*/
-
-        //Meteor.subscribe("autocompleteMetiers", jobToFind)
-        /*Session.set("errorrecher", "Loading")
-        setTimeout(function () {
-            if (jobToFind.length >= 3) {
-                findjob(jobToFind);
-            if (Metiers.find().count <= 0) {
-                Session.set("errorrecher", "Aucun métier pour ta saisie")
-            }
-        } else {
-            Session.set("errorrecher", "Saisir au moins 3 caractères")
-        }
-        }, timeout);
-*/
-        //$('.-autocomplete-container').show();
     },
     "autocompleteselect input": function(event, template, doc) {
         event.preventDefault();
@@ -279,52 +246,14 @@ Template.packageList.helpers({
 })
 
 Template._noJob.helpers({
-        messagederetour: function() {
-            console.log(Metiers.find().count());
-            if (Metiers.find().count() === 0) {
-                Session.set("errorrecher", "Aucun métier pour ta saisie")
-            } else {
-                Session.set("errorrecher", "Chargement en cours...")
-            }
-
-            return Session.get("errorrecher");
+    messagederetour: function() {
+        console.log(Metiers.find().count());
+        if (Metiers.find().count() === 0) {
+            Session.set("errorrecher", "Aucun métier pour ta saisie")
+        } else {
+            Session.set("errorrecher", "Chargement en cours...")
         }
-    })
-    /*
-     Template.packageList.helpers({
-      statRome:function(){
-        return Session.get("StatsForRome");
-      },
-      rome:function(){
-        //var obj = Metiers.find({ metier: {$regex: Session.get('job'), $options: '-i'} });
-        var findRecord = Metiers.find();
-        var nbRecord = Metiers.find().count();
-        console.log(nbRecord);
-        return findRecord;
-      },
-      json: function () {
-          return Session.get("jsonFile");
-      },
-      urljson: function () {
-          return Meteor.absoluteUrl("countries.json");
-      },
-      fromexternal: function () {
-          return fromexternal;
-      },
-      settings: function(){
-        return{
-            position:"bottom",
-            limit:10,
-            rules:[
-              {
-                token:"",
-                collection: Metiers,
-                field: Session.get('fieldToFind'),
-                matchAll: true,
-                template:Template.resultMetier
-              }
-            ]
-        };
-      }
-     });
-    */
+
+        return Session.get("errorrecher");
+    }
+})
