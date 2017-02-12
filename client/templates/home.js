@@ -71,22 +71,18 @@ returnjob = null;
 
 breakpointRome = [{
         breakpointNumber: 100 / 10,
-        wordingRome: "ÉVITE !",
-        wordingPopin: "BOUCHÉ"
+        wordingRome: "BEAUCOUP MOINS PORTEUR",
     },
     {
         breakpointNumber: 100 / 4,
-        wordingRome: "C’EST CONCURRENTIEL",
-        wordingPopin: "CONCURRENTIEL"
+        wordingRome: "MOINS PORTEUR"
     },
     {
         breakpointNumber: 100 / 2,
-        wordingRome: "C'EST DÉGAGÉ",
-        wordingPopin: "DÉGAGÉ"
+        wordingRome: "DANS LA MOYENNE"
     }, {
         breakpointNumber: 100,
-        wordingRome: "FONCE !",
-        wordingPopin: "PORTEUR"
+        wordingRome: "BEAUCOUP PLUS PORTEUR"
     }
 ]
 
@@ -113,9 +109,8 @@ var findjobWithRomeCode = function() {
         var stats = response.result.records[0].NB_OFFER_END_MONTH * 100 / response.result.records[0].NB_APPLICATION_END_MONTH;
         stats = stats.toFixed(2);
         breakpoint(stats);
-        var texttoShare = "Actuellement pour le métier " + metier +
-            ": tu as " + nbOffer + " postes disponibles pour " +
-            nbDemande + " demandeurs.";
+        var texttoShare = "Avec " + nbDemande + " pour " + nbOffer + " postes disponibles selon l'ANPE ce métier est" +
+            wordingRome + "que la moyenne";
         var result = {
             "metier": metier,
             "nbOffre": nbOffer,

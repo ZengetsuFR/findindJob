@@ -1,7 +1,7 @@
 <template name="job">
     {{#if Template.subscriptionsReady}}
         <h1>Futur {{metiers.metier}} ?</h1>
-        <h2><u>{{metiers.wordingRome}}</u> Tu as {{metiers.nbOffre}} postes disponibles pour {{metiers.nbDemande}} demandeurs selon les derniers chiffres de Pole Emploi</h2>
+        <h2>Avec {{metiers.nbDemande}} demandeurs pour {{metiers.nbOffre}} postes disponibles selon l'ANPE&#42; ce métier est <u>{{metiers.wordingRome}}</u>  que la moyenne.</h2>
 
         <div id="secteur-boutons">
             <a id="shareBtn" href="#" class="bouton-blanc">Partager sur Facebook</a>
