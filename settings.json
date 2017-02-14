@@ -1,8 +1,8 @@
 {
-    "private" : {
-        "anpePrivateKey" : "49ba90ec1c013effcce369c11349a7de762937397236fdf591e28dc381909be9"
+    "private": {
+        "anpePrivateKey": "49ba90ec1c013effcce369c11349a7de762937397236fdf591e28dc381909be9"
     },
-    "public":{
-        "anpePublicKey" :"ESD_findjob_2e7689aa306210c90456619e17280120b756f71129ba1c649ca121a6b1a88876"
+    "public": {
+        "anpePublicKey": "ESD_findjob_2e7689aa306210c90456619e17280120b756f71129ba1c649ca121a6b1a88876"
     }
 }

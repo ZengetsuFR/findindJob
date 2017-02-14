@@ -52,6 +52,7 @@ var nboffre = 0;
 var wordingRome = "";
 var wordingLibellePopin = "";
 var maxNumberOfSearch = 500;
+var isLoaded;
 
 
 
@@ -104,26 +105,36 @@ breakpoint = function(stat) {
 
 var findjobWithRomeCode = function() {
     Meteor.call("getStatForRome", code, function(err, response) {
-        nbOffer = response.result.records[0].NB_OFFER_END_MONTH;
-        nbDemande = response.result.records[0].NB_APPLICATION_END_MONTH;
-        var stats = response.result.records[0].NB_OFFER_END_MONTH * 100 / response.result.records[0].NB_APPLICATION_END_MONTH;
-        stats = stats.toFixed(2);
-        breakpoint(stats);
-        var texttoShare = "Avec " + nbDemande + " pour " + nbOffer + " postes disponibles selon l'ANPE ce métier est" +
-            wordingRome + "que la moyenne";
-        var result = {
-            "metier": metier,
-            "nbOffre": nbOffer,
-            "nbDemande": nbDemande,
-            "stats": stats,
-            "wordingLibellePopin": wordingLibellePopin,
-            "wordingRome": wordingRome,
-            "description": "Découvre si ton futur métier est porteur sur www.queldebouche.fr",
-            "facebookurl": window.location,
-            "quote": texttoShare
-        };
+        console.log(response);
+        if (response.message == "[undefined]") {
+            var result = {
+                "erreur": true,
+                "quote": "Données Indisponible"
+            }
+        } else {
+            nbOffer = response.result.records[0].NB_OFFER_END_MONTH;
+            nbDemande = response.result.records[0].NB_APPLICATION_END_MONTH;
+            var stats = response.result.records[0].NB_OFFER_END_MONTH * 100 / response.result.records[0].NB_APPLICATION_END_MONTH;
+            stats = stats.toFixed(2);
+            breakpoint(stats);
+            var texttoShare = "Avec " + nbDemande + " pour " + nbOffer + " postes disponibles selon Pôle Emploi ce métier est" +
+                wordingRome + "que la moyenne";
+            result = {
+                "erreur": false,
+                "metier": metier,
+                "nbOffre": nbOffer,
+                "nbDemande": nbDemande,
+                "stats": stats,
+                "wordingLibellePopin": wordingLibellePopin,
+                "wordingRome": wordingRome,
+                "description": "Découvre si ton futur métier est porteur sur www.queldebouche.fr",
+                "facebookurl": window.location,
+                "quote": texttoShare
+            };
+        }
         Session.set("statForRome", result);
     })
+
 };
 
 
@@ -247,7 +258,6 @@ Template.packageList.helpers({
 
 Template._noJob.helpers({
     messagederetour: function() {
-        console.log(Metiers.find().count());
         if (Metiers.find().count() === 0) {
             Session.set("errorrecher", "Aucun métier pour ta saisie")
         } else {
