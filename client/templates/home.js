@@ -109,7 +109,7 @@ var findjobWithRomeCode = function() {
         if (response.message == "[undefined]") {
             var result = {
                 "erreur": true,
-                "quote": "Données Indisponible"
+                "quote": "Données Indisponibles"
             }
         } else {
             nbOffer = response.result.records[0].NB_OFFER_END_MONTH;
