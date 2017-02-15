@@ -668,6 +668,6 @@ VERSION MOBILE
     .-autocomplete-container:after {
         content: "Chargement en cours...";
         color: black;
-        margin-left: -220px;
+        margin-left: -208px;
     }
 }
