@@ -273,67 +273,6 @@ PAGE
     width: 700px;
 }
 
-
-/*.flexdatalist-results {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-top: none;
-  background: #fff;
-  z-index: 100000;
-  max-height: 300px;
-  overflow-y: auto;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  color: #333;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.flexdatalist-results li {
-  padding: 5px 15px;
-  font-size: 14px;
-  line-height: 35px;
-	border:none;
-}
-
-.flexdatalist-results li:nth-child(odd){
-	background:#F0F0F0;
-	border:none;
-}
-
-.flexdatalist-results li span.highlight {
-  font-weight: 700;
-  text-decoration: underline;
-}
-.flexdatalist-results li.active {
-  background: #fc1e5c;
-  color: #fff;
-  cursor: pointer;
-}
-*/
-
-
-/*
-.progress-button{
-	position: relative;
-	width: 160px;
-	outline: none;
-	z-index: 50;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-	float: left;
-	border-top-left-radius:0px;
-	border-bottom-left-radius:0px;
-    background:url(../images/recherche.png) #FF1559 no-repeat center;
-	background-size: 40%;
-}
-
-.progress-button:hover{
-	background:url(../images/recherche.png) #e21b53 no-repeat center;
-	background-size: 40%;
-
-}*/
-
 .progress-button {
     position: absolute;
     top: 117px;
@@ -354,26 +293,6 @@ PAGE
 
 
 /**** DATA ANPE *****/
-
-
-/*
-#dataanpe{
-    font-family: Circular-Book;
-	padding-top:30px;
-	font-size:14px;
-	-webkit-animation:apparitioncontentline 1;
-	-moz-animation:apparitioncontentline 1;
-		animation:apparitioncontentline 1;
-		animation-delay: 2.5s;
-		-webkit-animation-fill-mode:backwards;
-		-moz-animation-fill-mode:backwards;
-		animation-fill-mode:backwards;
-		-webkit-animation-duration:1s;
-		-moz-animation-duration:1s;
-		animation-duration:1s;
-		opacity: 0;
-}
-*/
 
 #dataanpe {
     animation: fadein 2.5s;
@@ -541,10 +460,11 @@ VERSION MOBILE
         font-family: Circular-book;
     }
     h1 {
-        font-size: 30px;
+        font-size: 23px;
         margin-bottom: 10px;
     }
     h2 {
+        font-size: 16px;
         width: 100%;
     }
     #content {
@@ -600,31 +520,6 @@ VERSION MOBILE
         cursor: pointer;
         width: 356px;
     }
-    /*
-<div class="-autocomplete-container" style="left: 0px; width: 356px; top: 185px;">
-
-
-            <ul class="-autocomplete-list">
-
-                <li class="-autocomplete-item selected">
-
-
-                            acheteur / acheteuse d'espaces affichage
-
-
-                </li>
-
-            </ul>
-
-
-    </div>
-*/
-    /*
-.progress-button {
-	border-top-left-radius:2px;
-	border-bottom-left-radius:2px;
-	width:100%;
-}*/
     .progress-button {
         position: absolute;
         top: 159px;
@@ -668,7 +563,22 @@ VERSION MOBILE
     .-autocomplete-container:after {
         content: "Chargement en cours...";
         color: black;
-        margin-left: -208px;
+        margin-left: -175px;
+    }
+}
+
+@media screen and (max-width:414px) {
+    .-autocomplete-list li {
+        width: 322px;
+    }
+    .-autocomplete-list li:nth-child(odd) {
+        width: 322px;
+    }
+    .-autocomplete-list li span.highlight {
+        width: 322px;
+    }
+    .-autocomplete-list li.selected {
+        width: 322px;
     }
 }
 
@@ -678,8 +588,18 @@ VERSION MOBILE
 @media all and (orientation:landscape) {
     #content {
         top: 65%;
+        width: 698px;
+        left: 51%;
+        overflow: hidden;
     }
     h1 {
-        font-size: 32px;
+        font-size: 23px;
+    }
+    .progress-button {
+        top: 100px;
+        right: 7px;
+    }
+    .-autocomplete-container {
+        top: 155px !important;
     }
 }
