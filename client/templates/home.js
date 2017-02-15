@@ -53,6 +53,7 @@ var wordingRome = "";
 var wordingLibellePopin = "";
 var maxNumberOfSearch = 500;
 var isLoaded;
+var formDataHandle = {};
 
 
 
@@ -152,12 +153,6 @@ Template.job.onCreated(function() {
     this.subscribe("getStatForRome");
 })
 
-Template.packageList.onCreated(function() {
-    this.subscribe("autocompleteMetiers")
-    $('*').unbind('keyup keydown');
-    $("#metier").removeClass('errormessage');
-})
-
 Template.job.events({
     'click #backHome': function(event, template) {
         event.preventDefault();
@@ -179,6 +174,12 @@ Template.job.events({
     }
 })
 
+Template.packageList.onCreated(function() {
+    this.subscribe("autocompleteMetiers");
+    $('*').unbind('keyup keydown');
+    $("#metier").removeClass('errormessage');
+})
+
 
 Template.packageList.events({
     "submit form": function(event) {
@@ -198,7 +199,7 @@ Template.packageList.events({
         }
     },
     "input #metier": function(event) {
-        $("#metier").removeClass('errormessage');
+        $("#metier").removeClass('errorrecher');
     },
     "autocompleteselect input": function(event, template, doc) {
         event.preventDefault();
@@ -227,6 +228,7 @@ Template.packageList.onRendered(function() {
     $("#metier").focus();
     //Meteor.subscribe("autocompleteMetiers")
 })
+
 
 Template.packageList.helpers({
     findjob: function() {

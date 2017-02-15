@@ -47,7 +47,11 @@
     <div class="nojob search">(<i>{{messagederetour}}</i>)</div>
 </template>
 <template name="resultjob">
-    {{metier}}
+    {{#if metier}}
+      {{metier}}
+   {{else}}
+      {{> _searchingJob}}
+   {{/if}}
 </template>
 <template name="_searchingJob">
     <div class="nojob search">(<i>Chargement en cours...</i>)</div>
