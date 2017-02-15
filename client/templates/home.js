@@ -68,6 +68,7 @@ var code = urlParams.get("code");*/
 var subscription;
 var metier = unescape(getURLParameters("metier"));
 var code = unescape(getURLParameters("code"));
+var inputvalue;
 
 returnjob = null;
 
@@ -243,14 +244,12 @@ Template.packageList.helpers({
             limit: maxNumberOfSearch,
             rules: [{
                 token: "",
-                //subscription:"autocompleteMetiers",
                 collection: "Metiers",
                 //selector: function (match) { return $("input").val().trim().toLowerCase()},
                 option: "si",
                 field: "metier",
                 matchAll: true,
                 noMatchTemplate: Template._noJob,
-                loadingTemplate: Template._searchingJob,
                 template: Template.resultjob,
                 sort: true
             }]

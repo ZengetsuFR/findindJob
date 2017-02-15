@@ -218,6 +218,13 @@ PAGE
 
 .-autocomplete-container {
     top: 172px !important;
+    color: transparent;
+}
+
+.-autocomplete-container:after {
+    content: "Chargement en cours...";
+    color: black;
+    margin-left: -550px;
 }
 
 .nojob,
