@@ -671,3 +671,15 @@ VERSION MOBILE
         margin-left: -208px;
     }
 }
+
+
+/* Landscape */
+
+@media all and (orientation:landscape) {
+    #content {
+        top: 65%;
+    }
+    h1 {
+        font-size: 32px;
+    }
+}
