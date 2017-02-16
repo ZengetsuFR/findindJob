@@ -594,6 +594,8 @@ VERSION MOBILE
 
 /* Landscape */
 
+
+/*
 @media all and (orientation:landscape) {
     #content {
         top: 65%;
@@ -611,4 +613,4 @@ VERSION MOBILE
     .-autocomplete-container {
         top: 155px !important;
     }
-}
+}*/
