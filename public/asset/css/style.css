@@ -460,7 +460,7 @@ VERSION MOBILE
         font-family: Circular-book;
     }
     h1 {
-        font-size: 23px;
+        font-size: 20px;
         margin-bottom: 10px;
     }
     h2 {
@@ -494,7 +494,7 @@ VERSION MOBILE
         border: none;
     }
     .-autocomplete-container {
-        top: 210px !important;
+        top: 165px !important;
     }
     .nojob,
     .-autocomplete-list li {
@@ -581,7 +581,13 @@ VERSION MOBILE
         width: 322px;
     }
     .progress-button {
-        top: 139px;
+        top: 113px;
+    }
+    .-autocomplete-container {
+        top: 163px !important;
+    }
+    h1 {
+        font-size: 18px;
     }
 }
 
