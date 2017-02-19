@@ -619,24 +619,3 @@ VERSION MOBILE
         display: none;
     }
 }
-
-
-/*
-@media all and (orientation:landscape) {
-    #content {
-        top: 65%;
-        width: 698px;
-        left: 51%;
-        overflow: hidden;
-    }
-    h1 {
-        font-size: 23px;
-    }
-    .progress-button {
-        top: 100px;
-        right: 7px;
-    }
-    .-autocomplete-container {
-        top: 155px !important;
-    }
-}*/
