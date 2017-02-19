@@ -1,0 +1,58 @@
+<template name="packageList">
+    <h1>Ton futur métier est-il porteur ? </h1>
+	<h2>Découvre le taux de chômage de ton futur métier ou secteur !</h2>
+    <div id="main">
+
+    <form>
+    <div id="barrerecherche">
+    <!--
+        <input id="recherchermetier"
+                type='text'
+                placeholder='Rechercher un métier'
+                class='flexdatalist search'
+                data-min-length=0
+                data-data='findjob.json'
+                data-search-in='metier'
+                data-selectionRequired=true
+                data-focusFirstResult=true
+                maxlength="50"
+                onfocus="this.value = '';Session.set('errormessage','')">
+            -->
+        {{> inputAutocomplete settings=settings id="metier" class="input-xlarge search" name= "metier" placeholder="Rechercher par métier" }}
+		    <button id="notification-trigger" class="progress-button bouton-rose">
+			    <span class="content"></span>
+			    <span class="progress"></span>
+		    </button>
+	</div>
+    </form>
+
+    <div id="dataanpe">Ce site utilise uniquement les données Pôle Emploi</div>
+    <script type="text/javascript">
+        if( $.isFunction($.fn.flexdatalist) ){
+           //console.log("flexdatalist est chargé");
+                $('.flexdatalist').flexdatalist({
+                    minLength: 0,
+                    searchIn: 'metier',
+                    data: "findjob.json",
+                    valueProperty: "*",
+                    maxShownResults:500,
+                    searchContain:true
+                });
+        }
+     </script>
+    </div>
+</template>
+
+<template name="_noJob">
+    <div class="nojob search">(<i>{{messagederetour}}</i>)</div>
+</template>
+<template name="resultjob">
+    {{#if metier}}
+      {{metier}}
+   {{else}}
+      {{> _searchingJob}}
+   {{/if}}
+</template>
+<template name="_searchingJob">
+    <div class="nojob search">(<i>Chargement en cours...</i>)</div>
+</template>
