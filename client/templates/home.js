@@ -47,7 +47,6 @@ var isMobile = {
     }
 };
 
-
 var nboffre = 0;
 var wordingRome = "";
 var wordingLibellePopin = "";
@@ -107,7 +106,6 @@ breakpoint = function(stat) {
 
 var findjobWithRomeCode = function() {
     Meteor.call("getStatForRome", code, function(err, response) {
-        console.log(response);
         if (response.message == "[undefined]") {
             var result = {
                 "erreur": true,
@@ -245,8 +243,9 @@ Template.packageList.helpers({
             rules: [{
                 token: "",
                 collection: "Metiers",
+                //^\w+( \w+)*$
                 //selector: function (match) { return $("input").val().trim().toLowerCase()},
-                option: "si",
+                options: "imxs",
                 field: "metier",
                 matchAll: true,
                 noMatchTemplate: Template._noJob,
